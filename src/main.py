@@ -190,7 +190,7 @@ def get_expiration_info(state: dict) -> str:
     )
 
     if not database:
-        return "⏳ حذف کانفیگ‌های قدیمی: بدون کانفیگ"
+        return "حذف کانفیگ‌های قدیمی: بدون کانفیگ"
 
     now = int(time.time())
 
@@ -223,7 +223,7 @@ def get_expiration_info(state: dict) -> str:
 
     if not remaining_times:
         return (
-            "⏳ حذف کانفیگ‌های قدیمی: "
+            "حذف کانفیگ‌های قدیمی: "
             "نامشخص"
         )
 
@@ -240,23 +240,23 @@ def get_expiration_info(state: dict) -> str:
     if hours > 0:
         if minutes > 0:
             return (
-                "⏳ حذف کانفیگ‌های قدیمی: "
+                "حذف کانفیگ‌های قدیمی: "
                 f"{hours} ساعت و {minutes} دقیقه دیگر"
             )
 
         return (
-            "⏳ حذف کانفیگ‌های قدیمی: "
+            "حذف کانفیگ‌های قدیمی: "
             f"{hours} ساعت دیگر"
         )
 
     if minutes > 0:
         return (
-            "⏳ حذف کانفیگ‌های قدیمی: "
+            "حذف کانفیگ‌های قدیمی: "
             f"{minutes} دقیقه دیگر"
         )
 
     return (
-        "⏳ حذف کانفیگ‌های قدیمی: "
+        "حذف کانفیگ‌های قدیمی: "
         "کمتر از ۱ دقیقه دیگر"
     )
 
@@ -336,22 +336,37 @@ def generate_subscription(
     )
 
     # --------------------------------------------------------
+    # Fake SOCKS5 display config
+    #
+    # IMPORTANT:
+    # This is ONLY for configs.txt.
+    # It is NOT added to subscription.txt.
+    # --------------------------------------------------------
+
+    fake_socks5_remark = (
+        f"IR-RUSE | "
+        f"VLESS: {vless_count} | "
+        f"Trojan: {trojan_count} | "
+        f"All: {all_count} | "
+        f"Update: {date_text} - {time_text} | "
+        f"{expiration_info}"
+    )
+
+    fake_socks5 = (
+        "socks5://127.0.0.1:1080"
+        f"#{fake_socks5_remark}"
+    )
+
+    # --------------------------------------------------------
     # Human-readable output
     #
     # This file is NOT the subscription.
     # --------------------------------------------------------
 
-    info = (
-        f"ℹ️ VLESS: {vless_count} | "
-        f"Trojan: {trojan_count} | "
-        f"All: {all_count}\n\n"
-        f"🕒 آخرین بروزرسانی: "
-        f"{date_text} - {time_text}\n\n"
-        f"{expiration_info}\n\n"
-    )
-
     CONFIGS_FILE.write_text(
-        info + text,
+        fake_socks5
+        + "\n\n"
+        + text,
         encoding="utf-8",
     )
 
@@ -381,17 +396,48 @@ async def async_main():
     # Load state
     # --------------------------------------------------------
 
-    state = load_state(
-        str(STATE_FILE)
-    )
+    try:
+        state = load_state(
+            str(STATE_FILE)
+        )
+
+        if not isinstance(state, dict):
+            print(
+                "[WARNING] Invalid state format. "
+                "Creating a new state.",
+                flush=True,
+            )
+
+            state = {
+                "configs": {}
+            }
+
+    except Exception as e:
+        print(
+            f"[WARNING] Failed to load state: {e}",
+            flush=True,
+        )
+
+        state = {
+            "configs": {}
+        }
 
     # --------------------------------------------------------
     # Load sources
     # --------------------------------------------------------
 
-    telegram_channels, subscription_urls = (
-        load_sources()
-    )
+    try:
+        telegram_channels, subscription_urls = (
+            load_sources()
+        )
+
+    except Exception as e:
+        print(
+            f"[ERROR] Failed to load sources.txt: {e}",
+            flush=True,
+        )
+
+        return
 
     print(
         f"[INFO] Telegram channels: "
@@ -434,13 +480,40 @@ async def async_main():
             flush=True,
         )
 
-        telegram_configs = await collect_telegram(
-            int(api_id),
-            api_hash,
-            session_string,
-            telegram_channels,
-            state,
-        )
+        try:
+            telegram_configs = await asyncio.wait_for(
+                collect_telegram(
+                    int(api_id),
+                    api_hash,
+                    session_string,
+                    telegram_channels,
+                    state,
+                ),
+                timeout=120,
+            )
+
+            if not telegram_configs:
+                telegram_configs = []
+
+        except asyncio.TimeoutError:
+
+            print(
+                "[ERROR] Telegram collector timeout "
+                "(120 seconds). Continuing...",
+                flush=True,
+            )
+
+            telegram_configs = []
+
+        except Exception as e:
+
+            print(
+                f"[ERROR] Telegram collector failed: "
+                f"{type(e).__name__}: {e}",
+                flush=True,
+            )
+
+            telegram_configs = []
 
     elif telegram_channels:
 
@@ -459,11 +532,38 @@ async def async_main():
         flush=True,
     )
 
-    subscription_configs = (
-        await collect_subscriptions(
-            subscription_urls
+    subscription_configs = []
+
+    try:
+        subscription_configs = await asyncio.wait_for(
+            collect_subscriptions(
+                subscription_urls
+            ),
+            timeout=180,
         )
-    )
+
+        if not subscription_configs:
+            subscription_configs = []
+
+    except asyncio.TimeoutError:
+
+        print(
+            "[ERROR] Subscription collector timeout "
+            "(180 seconds). Continuing...",
+            flush=True,
+        )
+
+        subscription_configs = []
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Subscription collector failed: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        subscription_configs = []
 
     # --------------------------------------------------------
     # Collector statistics
@@ -492,18 +592,27 @@ async def async_main():
         )
     )
 
-    add_configs(
-        state,
-        telegram_configs
-        + subscription_configs,
-    )
+    try:
+
+        add_configs(
+            state,
+            telegram_configs
+            + subscription_configs,
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to add configs: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
 
     after = len(
         state.get(
             "configs",
-            {},
+            {}),
         )
-    )
 
     print(
         f"[INFO] Added unique: "
@@ -515,9 +624,21 @@ async def async_main():
     # Remove expired configs
     # --------------------------------------------------------
 
-    expired = remove_expired(
-        state
-    )
+    try:
+
+        expired = remove_expired(
+            state
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to remove expired configs: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        expired = 0
 
     print(
         f"[INFO] Removed expired: "
@@ -529,9 +650,21 @@ async def async_main():
     # Active configs
     # --------------------------------------------------------
 
-    active = get_active_configs(
-        state
-    )
+    try:
+
+        active = get_active_configs(
+            state
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to get active configs: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        active = []
 
     active.sort()
 
@@ -539,19 +672,43 @@ async def async_main():
     # Generate subscription + readable output
     # --------------------------------------------------------
 
-    generate_subscription(
-        active,
-        state,
-    )
+    try:
+
+        generate_subscription(
+            active,
+            state,
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to generate outputs: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        return
 
     # --------------------------------------------------------
     # Save state
     # --------------------------------------------------------
 
-    save_state(
-        str(STATE_FILE),
-        state,
-    )
+    try:
+
+        save_state(
+            str(STATE_FILE),
+            state,
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to save state: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        return
 
     # --------------------------------------------------------
     # Final statistics
