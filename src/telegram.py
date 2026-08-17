@@ -1,3 +1,5 @@
+import asyncio
+
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
@@ -14,20 +16,47 @@ async def collect_telegram(
     channels: list[str],
     state: dict,
 ):
+    print("[TG] Creating Telegram client...", flush=True)
+
     client = TelegramClient(
         StringSession(session_string),
         api_id,
         api_hash,
+        timeout=20,
+        connection_retries=2,
+        request_retries=2,
+        retry_delay=2,
     )
 
     collected = []
     telegram_state = state.setdefault("telegram", {})
 
-    await client.connect()
-
     try:
-        if not await client.is_user_authorized():
-            raise RuntimeError("Telegram session is not authorized.")
+        print("[TG] Connecting...", flush=True)
+
+        await asyncio.wait_for(
+            client.connect(),
+            timeout=30,
+        )
+
+        print("[TG] Connected.", flush=True)
+
+        print("[TG] Checking authorization...", flush=True)
+
+        authorized = await asyncio.wait_for(
+            client.is_user_authorized(),
+            timeout=30,
+        )
+
+        print(
+            f"[TG] Authorized: {authorized}",
+            flush=True,
+        )
+
+        if not authorized:
+            raise RuntimeError(
+                "Telegram session is not authorized."
+            )
 
         for channel in channels:
             channel = channel.strip()
@@ -35,32 +64,48 @@ async def collect_telegram(
             if not channel:
                 continue
 
+            print(
+                f"[TG] Processing channel: {channel}",
+                flush=True,
+            )
+
             try:
-                entity = await client.get_entity(channel)
+                entity = await asyncio.wait_for(
+                    client.get_entity(channel),
+                    timeout=30,
+                )
+
+                print(
+                    f"[TG] Entity resolved: {channel}",
+                    flush=True,
+                )
+
                 key = str(entity.id)
 
-                # آخرین پیام پردازش‌شده
                 saved_last_id = telegram_state.get(key)
 
-                # --------------------------------------------------
-                # اولین اجرا:
-                # فقط 20 پیام آخر
-                # --------------------------------------------------
+                # ==========================================
+                # FIRST RUN -> ONLY LAST 20 MESSAGES
+                # ==========================================
                 if saved_last_id is None:
-                    messages = client.iter_messages(
-                        entity,
-                        limit=INITIAL_MESSAGES,
+
+                    print(
+                        f"[TG] First scan -> last 20 messages: {channel}",
+                        flush=True,
                     )
 
                     newest_id = 0
 
-                    async for message in messages:
+                    async for message in client.iter_messages(
+                        entity,
+                        limit=INITIAL_MESSAGES,
+                    ):
                         if not message or not message.id:
                             continue
 
                         newest_id = max(
                             newest_id,
-                            message.id
+                            message.id,
                         )
 
                         text = get_full_message_text(message)
@@ -81,19 +126,24 @@ async def collect_telegram(
                         telegram_state[key] = newest_id
 
                     print(
-                        f"[TELEGRAM] Initial scan: "
-                        f"{channel} | last={newest_id} | "
-                        f"configs={len(collected)}",
+                        f"[TG] First scan done: {channel} | "
+                        f"newest_id={newest_id}",
                         flush=True,
                     )
 
-                # --------------------------------------------------
-                # اجراهای بعدی:
-                # فقط پیام‌های جدید
-                # --------------------------------------------------
+                # ==========================================
+                # NEXT RUN -> ONLY NEW MESSAGES
+                # ==========================================
                 else:
+
                     last_id = int(saved_last_id)
                     newest_id = last_id
+
+                    print(
+                        f"[TG] Incremental scan: {channel} | "
+                        f"{last_id} -> new messages",
+                        flush=True,
+                    )
 
                     async for message in client.iter_messages(
                         entity,
@@ -105,7 +155,7 @@ async def collect_telegram(
 
                         newest_id = max(
                             newest_id,
-                            message.id
+                            message.id,
                         )
 
                         text = get_full_message_text(message)
@@ -125,61 +175,66 @@ async def collect_telegram(
                     telegram_state[key] = newest_id
 
                     print(
-                        f"[TELEGRAM] New messages: "
-                        f"{channel} | "
-                        f"{last_id} -> {newest_id}",
+                        f"[TG] Incremental scan done: {channel} | "
+                        f"newest_id={newest_id}",
                         flush=True,
                     )
 
+            except asyncio.TimeoutError:
+                print(
+                    f"[TG TIMEOUT] {channel}",
+                    flush=True,
+                )
+
             except Exception as exc:
                 print(
-                    f"[TELEGRAM ERROR] {channel}: "
+                    f"[TG ERROR] {channel}: "
                     f"{type(exc).__name__}: {exc}",
                     flush=True,
                 )
 
+    except asyncio.TimeoutError:
+        print(
+            "[TG FATAL] Telegram connection timeout.",
+            flush=True,
+        )
+
     finally:
-        await client.disconnect()
+        print("[TG] Disconnecting...", flush=True)
+
+        try:
+            await asyncio.wait_for(
+                client.disconnect(),
+                timeout=10,
+            )
+        except Exception as exc:
+            print(
+                f"[TG] Disconnect error: {exc}",
+                flush=True,
+            )
+
+        print("[TG] Disconnected.", flush=True)
 
     return collected
 
 
 def get_full_message_text(message) -> str:
-    """
-    تمام محتوای متنی قابل دسترس پیام Telegram را جمع می‌کند.
-
-    شامل:
-    - متن عادی
-    - متن code/pre
-    - quote
-    - URL های داخل entity
-    - text_url
-    - متن caption
-    """
-
     parts = []
 
-    # متن اصلی / caption
     text = getattr(message, "message", None)
 
     if text:
         parts.append(str(text))
 
-    # --------------------------------------------------
-    # Message entities
-    # --------------------------------------------------
-
     entities = getattr(message, "entities", None) or []
 
     for entity in entities:
         try:
-            # TextUrl
             url = getattr(entity, "url", None)
 
             if url:
                 parts.append(str(url))
 
-            # URL
             offset = getattr(entity, "offset", None)
             length = getattr(entity, "length", None)
 
@@ -188,7 +243,9 @@ def get_full_message_text(message) -> str:
                 and length is not None
                 and text
             ):
-                value = text[offset:offset + length]
+                value = text[
+                    offset:offset + length
+                ]
 
                 if value:
                     parts.append(str(value))
@@ -196,21 +253,17 @@ def get_full_message_text(message) -> str:
         except Exception:
             continue
 
-    # --------------------------------------------------
-    # Message media caption
-    # --------------------------------------------------
-
     media = getattr(message, "media", None)
 
     if media:
-        caption = getattr(media, "caption", None)
+        caption = getattr(
+            media,
+            "caption",
+            None,
+        )
 
         if caption:
             parts.append(str(caption))
-
-    # --------------------------------------------------
-    # حذف تکراری‌ها بدون تغییر محتوا
-    # --------------------------------------------------
 
     result = []
     seen = set()
