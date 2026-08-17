@@ -1,0 +1,104 @@
+name: Update V2Ray Subscription
+
+on:
+  schedule:
+    # Every 30 minutes
+    # GitHub cron uses UTC
+    - cron: "7,37 * * * *"
+
+  # Allow manual execution
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Prevent multiple collector runs from working at the same time.
+# The next run waits for the previous one instead of cancelling it.
+concurrency:
+  group: update-subscription
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ----------------------------------------------------------
+      # Checkout repository
+      # ----------------------------------------------------------
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      # ----------------------------------------------------------
+      # Python
+      # ----------------------------------------------------------
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      # ----------------------------------------------------------
+      # Dependencies
+      # ----------------------------------------------------------
+
+      - name: Install dependencies
+        timeout-minutes: 5
+        run: |
+          python -m pip install --upgrade pip
+          python -u -m pip install \
+            --disable-pip-version-check \
+            --prefer-binary \
+            -r requirements.txt
+
+      # ----------------------------------------------------------
+      # Run collector
+      # ----------------------------------------------------------
+
+      - name: Run collector
+        timeout-minutes: 10
+        env:
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_SESSION: ${{ secrets.TG_SESSION }}
+        run: |
+          echo "Starting collector..."
+          python -u -m src.main
+          echo "Collector finished."
+
+      # ----------------------------------------------------------
+      # Commit generated files
+      # ----------------------------------------------------------
+
+      - name: Commit updated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            data/state.json \
+            output/subscription.txt \
+            output/configs.txt
+
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+
+          git commit -m "Auto update subscription"
+
+      # ----------------------------------------------------------
+      # Sync with remote and push
+      # ----------------------------------------------------------
+
+      - name: Sync and push
+        run: |
+          git fetch origin main
+          git rebase origin/main
+          git push origin main
