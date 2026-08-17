@@ -1,5 +1,5 @@
 # ⚡ IR-RUSE Subscription Collector
-# 📘EN | FA📕
+# 📘[EN]([url](https://github.com/KhodeJav/ir-ruse-sub/edit/main/README.md)) | FA📕
 
 > **Automatic V2Ray Subscription**
 >
