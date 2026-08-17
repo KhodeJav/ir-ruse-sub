@@ -272,14 +272,22 @@ def canonical_config(config: str) -> str:
 
 
 def normalize_config(config: str) -> str:
-    """
-    خروجی نهایی برای ذخیره در subscription.
-
-    عمداً URI را خراب یا decode نمی‌کنیم.
-    """
-
     if not config:
         return ""
+
+    config = str(config).strip()
+
+    hash_index = config.find("#")
+
+    if hash_index == -1:
+        return config + "#Telegram%20%40iR_RUSE"
+
+    # بسیار مهم:
+    # کل URI قبل از # بدون هیچ تغییری حفظ می‌شود.
+    base = config[:hash_index]
+
+    # فقط Remark تغییر می‌کند.
+    return base + "#Telegram%20%40iR_RUSE"
 
     value = str(config).strip()
 
