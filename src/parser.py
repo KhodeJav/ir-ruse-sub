@@ -191,3 +191,41 @@ def decode_base64(value: str) -> str | None:
 
     except Exception:
         return None
+
+
+def decode_possible_base64(value: str) -> str | None:
+    """
+    تلاش برای Decode کردن Base64.
+    اگر ورودی Base64 معتبر نباشد، None برمی‌گرداند.
+    """
+
+    if not value:
+        return None
+
+    value = value.strip()
+
+    try:
+        # Base64 معمولی و URL-safe
+        normalized = value.replace("-", "+").replace("_", "/")
+
+        # حذف فاصله‌های احتمالی
+        normalized = "".join(normalized.split())
+
+        # Padding
+        padding = len(normalized) % 4
+
+        if padding:
+            normalized += "=" * (4 - padding)
+
+        decoded = base64.b64decode(
+            normalized,
+            validate=False,
+        )
+
+        return decoded.decode(
+            "utf-8",
+            errors="ignore",
+        ).strip()
+
+    except Exception:
+        return None
