@@ -1,5 +1,5 @@
 # ⚡ IR-RUSE Subscription Collector
-# 📘[EN](#English) | FA📕
+# 📘[EN](#-English) | FA📕
 
 > **Automatic V2Ray Subscription**
 >
