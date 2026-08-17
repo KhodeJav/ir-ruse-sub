@@ -1,8 +1,10 @@
 import base64
+import hashlib
 import re
 from urllib.parse import unquote
 
 
+# پروتکل‌های قابل استخراج
 PROTOCOLS = (
     "vless://",
     "vmess://",
@@ -26,16 +28,23 @@ URI_PATTERN = re.compile(
     re.IGNORECASE | re.VERBOSE,
 )
 
+# برای پیدا کردن رشته‌های Base64 نسبتاً بلند
+BASE64_PATTERN = re.compile(
+    r"\b[A-Za-z0-9+/=_-]{40,}\b"
+)
+
 
 def clean_text(text: str) -> str:
     if not text:
         return ""
 
-    # Telegram markdown / quote / code formatting
+    text = str(text)
+
+    # یکسان‌سازی newline
     text = text.replace("\r\n", "\n")
     text = text.replace("\r", "\n")
 
-    # Unicode های نامرئی
+    # حذف کاراکترهای نامرئی
     invisible = (
         "\u200b",
         "\u200c",
@@ -47,12 +56,13 @@ def clean_text(text: str) -> str:
     for char in invisible:
         text = text.replace(char, "")
 
-    # URL encode مثل %3A%2F%2F
+    # Decode کردن URL encoding
     try:
         decoded = unquote(text)
 
         if decoded != text:
-            text += "\n" + decoded
+            text = text + "\n" + decoded
+
     except Exception:
         pass
 
@@ -61,10 +71,20 @@ def clean_text(text: str) -> str:
 
 def extract_configs(text: str) -> list[str]:
     """
-    استخراج مستقیم کانفیگ‌ها از متن.
+    استخراج کانفیگ از متن Telegram.
 
-    فرمت‌های Telegram Markdown / Quote / Code
-    اهمیتی ندارند؛ چون در نهایت متن خام بررسی می‌شود.
+    پشتیبانی از:
+    - vless://
+    - vmess://
+    - trojan://
+    - ss://
+    - ssr://
+    - socks://
+    - socks5://
+    - URIهای URL-encoded
+    - VMess Base64
+    - Base64 شامل URI
+    - متن quote/code/monospace
     """
 
     if not text:
@@ -74,14 +94,13 @@ def extract_configs(text: str) -> list[str]:
 
     configs = []
 
-    # --------------------------------------------------
-    # استخراج مستقیم URI
-    # --------------------------------------------------
+    # ==========================================================
+    # 1. URI مستقیم
+    # ==========================================================
 
     for match in URI_PATTERN.finditer(text):
         config = match.group(0)
 
-        # کاراکترهای انتهایی که جزو URI نیستند
         config = config.rstrip(
             ".,;:!?)]}>\"'`"
         )
@@ -89,55 +108,57 @@ def extract_configs(text: str) -> list[str]:
         if config:
             configs.append(config)
 
-    # --------------------------------------------------
-    # استخراج VMess Base64
-    # --------------------------------------------------
+    # ==========================================================
+    # 2. VMess Base64
+    # ==========================================================
 
-    for token in re.findall(
-        r"(?:vmess://)?([A-Za-z0-9+/=_-]{40,})",
-        text,
-    ):
-        decoded = decode_base64(token)
+    for match in BASE64_PATTERN.finditer(text):
+        token = match.group(0)
+
+        decoded = decode_possible_base64(token)
 
         if not decoded:
             continue
 
-        if (
-            "v" in decoded
-            and (
-                "add" in decoded
-                or "host" in decoded
-                or "port" in decoded
-            )
-        ):
+        decoded_clean = decoded.strip()
+
+        # VMess JSON
+        if looks_like_vmess_json(decoded_clean):
             configs.append(
-                "vmess://" + token
+                "vmess://" + normalize_base64_token(token)
             )
 
-    # --------------------------------------------------
-    # استخراج Base64 عمومی که داخلش URI وجود دارد
-    # --------------------------------------------------
-
-    for token in re.findall(
-        r"\b[A-Za-z0-9+/=_-]{50,}\b",
-        text,
-    ):
-        decoded = decode_base64(token)
-
-        if not decoded:
-            continue
-
-        for match in URI_PATTERN.finditer(decoded):
-            config = match.group(0).rstrip(
+        # Base64 شامل URI
+        for uri_match in URI_PATTERN.finditer(decoded_clean):
+            config = uri_match.group(0).rstrip(
                 ".,;:!?)]}>\"'`"
             )
 
             if config:
                 configs.append(config)
 
-    # --------------------------------------------------
-    # پاکسازی و Deduplicate
-    # --------------------------------------------------
+    # ==========================================================
+    # 3. VMess هایی که از قبل vmess:// دارند
+    # ==========================================================
+
+    vmess_pattern = re.compile(
+        r"vmess://([A-Za-z0-9+/=_-]+)",
+        re.IGNORECASE,
+    )
+
+    for match in vmess_pattern.finditer(text):
+        payload = match.group(1).rstrip(
+            ".,;:!?)]}>\"'`"
+        )
+
+        if payload:
+            configs.append(
+                "vmess://" + payload
+            )
+
+    # ==========================================================
+    # 4. نرمال‌سازی خروجی بدون خراب کردن محتوا
+    # ==========================================================
 
     result = []
     seen = set()
@@ -148,8 +169,8 @@ def extract_configs(text: str) -> list[str]:
         if not config:
             continue
 
-        # Telegram ممکن است % encoding داشته باشد.
-        # اما خود config را دستکاری نمی‌کنیم.
+        # فقط حذف newline/space اطراف
+        # محتوای واقعی URI را تغییر نمی‌دهیم.
         key = config
 
         if key in seen:
@@ -161,21 +182,52 @@ def extract_configs(text: str) -> list[str]:
     return result
 
 
+def looks_like_vmess_json(text: str) -> bool:
+    if not text:
+        return False
+
+    lower = text.lower()
+
+    # VMess JSON معمولاً این فیلدها را دارد
+    return (
+        "add" in lower
+        and "port" in lower
+        and (
+            "id" in lower
+            or "ps" in lower
+            or "net" in lower
+        )
+    )
+
+
+def normalize_base64_token(value: str) -> str:
+    """
+    Base64 را فقط از نظر فاصله و padding مرتب می‌کند.
+    """
+    value = value.strip()
+
+    value = value.replace("-", "+")
+    value = value.replace("_", "/")
+
+    value = "".join(value.split())
+
+    padding = len(value) % 4
+
+    if padding:
+        value += "=" * (4 - padding)
+
+    return value
+
+
 def decode_base64(value: str) -> str | None:
+    if not value:
+        return None
+
     try:
-        value = value.strip()
-
-        # URL-safe Base64
-        value = value.replace("-", "+")
-        value = value.replace("_", "/")
-
-        padding = len(value) % 4
-
-        if padding:
-            value += "=" * (4 - padding)
+        normalized = normalize_base64_token(value)
 
         raw = base64.b64decode(
-            value,
+            normalized,
             validate=False,
         )
 
@@ -195,37 +247,56 @@ def decode_base64(value: str) -> str | None:
 
 def decode_possible_base64(value: str) -> str | None:
     """
-    تلاش برای Decode کردن Base64.
-    اگر ورودی Base64 معتبر نباشد، None برمی‌گرداند.
+    برای سازگاری با sources.py.
+    """
+    return decode_base64(value)
+
+
+def canonical_config(config: str) -> str:
+    """
+    نسخه canonical برای deduplication.
+
+    URI را تا حد امکان بدون تغییر نگه می‌دارد.
+    فقط whitespace اطراف حذف می‌شود.
     """
 
-    if not value:
-        return None
+    if not config:
+        return ""
 
+    value = str(config).strip()
+
+    # newline و فاصله‌های ابتدا/انتها
     value = value.strip()
 
-    try:
-        # Base64 معمولی و URL-safe
-        normalized = value.replace("-", "+").replace("_", "/")
+    return value
 
-        # حذف فاصله‌های احتمالی
-        normalized = "".join(normalized.split())
 
-        # Padding
-        padding = len(normalized) % 4
+def normalize_config(config: str) -> str:
+    """
+    خروجی نهایی برای ذخیره در subscription.
 
-        if padding:
-            normalized += "=" * (4 - padding)
+    عمداً URI را خراب یا decode نمی‌کنیم.
+    """
 
-        decoded = base64.b64decode(
-            normalized,
-            validate=False,
-        )
+    if not config:
+        return ""
 
-        return decoded.decode(
-            "utf-8",
-            errors="ignore",
-        ).strip()
+    value = str(config).strip()
 
-    except Exception:
-        return None
+    # newline داخلی در یک کانفیگ معمولاً نباید وجود داشته باشد
+    value = value.replace("\r", "")
+    value = value.replace("\n", "")
+
+    return value
+
+
+def config_hash(config: str) -> str:
+    """
+    Hash اختیاری برای استفاده‌های آینده.
+    """
+
+    canonical = canonical_config(config)
+
+    return hashlib.sha256(
+        canonical.encode("utf-8")
+    ).hexdigest()
