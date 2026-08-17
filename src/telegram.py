@@ -1,5 +1,3 @@
-import asyncio
-
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
@@ -7,7 +5,6 @@ from .parser import extract_configs
 
 
 INITIAL_MESSAGES = 20
-PAGE_SIZE = 100
 
 
 async def collect_telegram(
@@ -35,27 +32,14 @@ async def collect_telegram(
     try:
         print("[TG] Connecting...", flush=True)
 
-        await asyncio.wait_for(
-            client.connect(),
-            timeout=30,
-        )
+        await client.connect()
 
         print("[TG] Connected.", flush=True)
 
-        authorized = await asyncio.wait_for(
-            client.is_user_authorized(),
-            timeout=30,
-        )
+        if not await client.is_user_authorized():
+            raise RuntimeError("Telegram session is not authorized.")
 
-        print(
-            f"[TG] Authorized: {authorized}",
-            flush=True,
-        )
-
-        if not authorized:
-            raise RuntimeError(
-                "Telegram session is not authorized."
-            )
+        print("[TG] Authorized: True", flush=True)
 
         for channel in channels:
             channel = channel.strip()
@@ -63,16 +47,13 @@ async def collect_telegram(
             if not channel:
                 continue
 
-            print(
-                f"[TG] Processing channel: {channel}",
-                flush=True,
-            )
-
             try:
-                entity = await asyncio.wait_for(
-                    client.get_entity(channel),
-                    timeout=30,
+                print(
+                    f"[TG] Processing channel: {channel}",
+                    flush=True,
                 )
+
+                entity = await client.get_entity(channel)
 
                 print(
                     f"[TG] Entity resolved: {channel}",
@@ -80,31 +61,30 @@ async def collect_telegram(
                 )
 
                 key = str(entity.id)
+
                 saved_last_id = telegram_state.get(key)
 
                 # ==================================================
                 # FIRST RUN
                 # فقط 20 پیام آخر
                 # ==================================================
+
                 if saved_last_id is None:
 
                     print(
-                        f"[TG] First scan -> last {INITIAL_MESSAGES}: {channel}",
+                        f"[TG] FIRST RUN -> scanning only last "
+                        f"{INITIAL_MESSAGES} messages",
                         flush=True,
                     )
 
-                    messages = await asyncio.wait_for(
-                        client.get_messages(
-                            entity,
-                            limit=INITIAL_MESSAGES,
-                        ),
-                        timeout=60,
+                    messages = await client.get_messages(
+                        entity,
+                        limit=INITIAL_MESSAGES,
                     )
 
                     newest_id = 0
+                    found_configs = 0
 
-                    # get_messages از جدید به قدیم برمی‌گرداند
-                    # ولی همه همان 20 پیام آخر هستند.
                     for message in messages:
                         if not message or not message.id:
                             continue
@@ -121,6 +101,8 @@ async def collect_telegram(
 
                         configs = extract_configs(text)
 
+                        found_configs += len(configs)
+
                         for config in configs:
                             collected.append({
                                 "config": config,
@@ -132,114 +114,142 @@ async def collect_telegram(
                         telegram_state[key] = newest_id
 
                     print(
-                        f"[TG] First scan done: {channel} | "
+                        f"[TG] FIRST RUN DONE | "
+                        f"channel={channel} | "
                         f"last_id={newest_id} | "
-                        f"configs={len(collected)}",
+                        f"configs={found_configs}",
                         flush=True,
                     )
+
+                    continue
 
                 # ==================================================
                 # NEXT RUN
                 # فقط پیام های جدید
                 # ==================================================
-                else:
 
-                    last_id = int(saved_last_id)
-                    newest_id = last_id
+                last_id = int(saved_last_id)
 
-                    print(
-                        f"[TG] Incremental scan: {channel} | "
-                        f"{last_id} -> new messages",
-                        flush=True,
-                    )
-
-                    total_messages = 0
-                    page = 0
-
-                    # ------------------------------------------------
-                    # هر بار فقط 100 پیام
-                    # ------------------------------------------------
-                    while True:
-                        page += 1
-
-                        print(
-                            f"[TG] Fetching page {page} "
-                            f"after message {newest_id}...",
-                            flush=True,
-                        )
-
-                        messages = await asyncio.wait_for(
-                            client.get_messages(
-                                entity,
-                                min_id=newest_id,
-                                limit=PAGE_SIZE,
-                                reverse=True,
-                            ),
-                            timeout=60,
-                        )
-
-                        if not messages:
-                            break
-
-                        page_new_messages = 0
-
-                        for message in messages:
-                            if not message or not message.id:
-                                continue
-
-                            if message.id <= newest_id:
-                                continue
-
-                            page_new_messages += 1
-                            total_messages += 1
-
-                            newest_id = max(
-                                newest_id,
-                                message.id,
-                            )
-
-                            text = get_full_message_text(message)
-
-                            if not text:
-                                continue
-
-                            configs = extract_configs(text)
-
-                            for config in configs:
-                                collected.append({
-                                    "config": config,
-                                    "source": channel,
-                                    "message_id": message.id,
-                                })
-
-                        print(
-                            f"[TG] Page {page} done | "
-                            f"messages={page_new_messages} | "
-                            f"last_id={newest_id}",
-                            flush=True,
-                        )
-
-                        # اگر کمتر از PAGE_SIZE برگشت،
-                        # یعنی احتمالاً به آخرین پیام‌ها رسیده‌ایم.
-                        if len(messages) < PAGE_SIZE:
-                            break
-
-                        # جلوگیری از loop بی‌نهایت
-                        if page_new_messages == 0:
-                            break
-
-                    telegram_state[key] = newest_id
-
-                    print(
-                        f"[TG] Incremental scan done: {channel} | "
-                        f"new_messages={total_messages} | "
-                        f"newest_id={newest_id}",
-                        flush=True,
-                    )
-
-            except asyncio.TimeoutError:
                 print(
-                    f"[TG TIMEOUT] {channel}",
+                    f"[TG] Checking new messages | "
+                    f"channel={channel} | "
+                    f"last_id={last_id}",
+                    flush=True,
+                )
+
+                # --------------------------------------------------
+                # فقط آخرین پیام کانال را می‌گیریم
+                # --------------------------------------------------
+
+                latest = await client.get_messages(
+                    entity,
+                    limit=1,
+                )
+
+                if not latest:
+                    print(
+                        f"[TG] Channel empty: {channel}",
+                        flush=True,
+                    )
+                    continue
+
+                latest_message = latest[0]
+
+                if not latest_message or not latest_message.id:
+                    continue
+
+                latest_id = latest_message.id
+
+                print(
+                    f"[TG] Latest message ID: {latest_id}",
+                    flush=True,
+                )
+
+                # --------------------------------------------------
+                # هیچ پیام جدیدی نداریم
+                # --------------------------------------------------
+
+                if latest_id <= last_id:
+                    print(
+                        f"[TG] No new message: {channel}",
+                        flush=True,
+                    )
+                    continue
+
+                # --------------------------------------------------
+                # پیام جدید داریم
+                #
+                # همه پیام‌های جدید بین last_id و latest_id
+                # استخراج می‌شوند.
+                #
+                # اما هرگز تاریخچه قبل از last_id خوانده نمی‌شود.
+                # --------------------------------------------------
+
+                print(
+                    f"[TG] NEW MESSAGES: "
+                    f"{last_id + 1} -> {latest_id}",
+                    flush=True,
+                )
+
+                messages = await client.get_messages(
+                    entity,
+                    min_id=last_id,
+                    max_id=latest_id + 1,
+                    reverse=True,
+                )
+
+                newest_processed_id = last_id
+                found_configs = 0
+                found_messages = 0
+
+                for message in messages:
+                    if not message or not message.id:
+                        continue
+
+                    if message.id <= last_id:
+                        continue
+
+                    if message.id > latest_id:
+                        continue
+
+                    found_messages += 1
+
+                    newest_processed_id = max(
+                        newest_processed_id,
+                        message.id,
+                    )
+
+                    text = get_full_message_text(message)
+
+                    if not text:
+                        continue
+
+                    configs = extract_configs(text)
+
+                    found_configs += len(configs)
+
+                    for config in configs:
+                        collected.append({
+                            "config": config,
+                            "source": channel,
+                            "message_id": message.id,
+                        })
+
+                # --------------------------------------------------
+                # آخرین پیام پردازش‌شده ذخیره می‌شود
+                # --------------------------------------------------
+
+                telegram_state[key] = max(
+                    newest_processed_id,
+                    latest_id,
+                )
+
+                print(
+                    f"[TG] UPDATE DONE | "
+                    f"channel={channel} | "
+                    f"messages={found_messages} | "
+                    f"configs={found_configs} | "
+                    f"last_id={telegram_state[key]}",
                     flush=True,
                 )
 
@@ -254,10 +264,7 @@ async def collect_telegram(
         print("[TG] Disconnecting...", flush=True)
 
         try:
-            await asyncio.wait_for(
-                client.disconnect(),
-                timeout=10,
-            )
+            await client.disconnect()
         except Exception as exc:
             print(
                 f"[TG] Disconnect error: {exc}",
@@ -272,11 +279,13 @@ async def collect_telegram(
 def get_full_message_text(message) -> str:
     parts = []
 
+    # متن اصلی / caption
     text = getattr(message, "message", None)
 
     if text:
         parts.append(str(text))
 
+    # Telegram entities
     entities = getattr(message, "entities", None) or []
 
     for entity in entities:
@@ -304,6 +313,7 @@ def get_full_message_text(message) -> str:
         except Exception:
             continue
 
+    # media caption
     media = getattr(message, "media", None)
 
     if media:
@@ -316,6 +326,7 @@ def get_full_message_text(message) -> str:
         if caption:
             parts.append(str(caption))
 
+    # حذف تکراری‌ها
     result = []
     seen = set()
 
