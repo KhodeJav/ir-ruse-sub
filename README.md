@@ -1,7 +1,7 @@
 # ⚡ IR-RUSE Subscription Collector
-<
+>
 test
-<
+>
 > **Automatic V2Ray Subscription**
 >
 > جمع‌آوری خودکار کانفیگ‌ها از منابع مختلف و ارائه آن‌ها در قالب یک Subscription واحد.
