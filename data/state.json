@@ -1,8 +1,8 @@
 {
   "telegram": {
-    "2025442005": 1239,
+    "2025442005": 165819,
     "4388653422": 1,
-    "2211787746": 585
+    "2211787746": 33352
   },
   "configs": {
     "221ecb160612adff4f4ae0748711987a6c4f6b5ce2fea89d4dff1e262bd7c3af": {
@@ -1158,6 +1158,76 @@
     "3985be9773885147be42b164e493b15354476a69b97ce733424e40224fbcbece": {
       "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=%2FzyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#T.me%2FiR_RUSE%20%7C%20%DA%A9%D8%A7%D9%86%D8%A7%D9%84%20%D9%85%D8%A7",
       "created_at": 1786967986,
+      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
+    },
+    "8d03e9081e42d5171e04587b4e2f1f7e2753af4b8932522eb14579c1d16c6556": {
+      "config": "vless://8975546a-375c-4966-8064-19fc0f66f30a@31.76.80.69:2083?mode=auto&path=%2F%3F%40MARAMBASHI_MARAMBASHI_MARAMBASHI_MARAMBASHI%3Fed%3D2048&security=reality&encryption=none&extra=%7B%22mode%22%3A%22auto%22%7D&pbk=zq3gOJkXi6laNuxMohL3lr-wFOKi4Z9oG7QuMMiTDAk&fp=chrome&spx=%2Fy52f8gp4rv1il6u&type=xhttp&sni=www.amd.com&sid=29b21343ab4d#%40filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "1adbb98a9711a065235d887df0ad0dae9bd932341c7b9015449ce50fe7070dbc": {
+      "config": "vless://06d44c57-8e1a-41f4-b9c4-65d35869e078@147.45.50.24:13868?security=reality&encryption=none&pbk=sgpya-5ohMKCjzyrDe4RWz7b8O9XegDzQ88oHCV45Gk&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=booking.com&sid=e852dc#%40filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "894276ed33b5bb36c4df0c18aede0e3670cb8f17edeb9bb37779c66a919fdc2b": {
+      "config": "vless://5c22dd50-f75d-4cf5-ba53-721f91d8bfe1@193.233.255.32:443?security=reality&encryption=none&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=fr.sellflow.org#%40filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "bc21a9bed9d7e00451654cb502655ad5dc9f32ca27e3d928de2e9227d279cf8c": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.201:8080#%40filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "1d42fd939e69a52961ea4990eb17d133ff5f3e7e1f9b42ef535ffe09bf0e213e": {
+      "config": "vless://e15b0798-45e6-4a02-8385-80dc4b0faa70@222.167.211.96:443?security=reality&encryption=none&pbk=S9oBz3oVyOuJw_3wXR1YGLbL7YUY9uyE96sE-YioSBE&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=littlechoice.whit3.net&sid=e43c750c515a4185#%40filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "ea3b1b8d8b6bd9f638e90254d14a70a2ec9b9fa4390a3f1f9231138b71e2da62": {
+      "config": "vless://8975546a-375c-4966-8064-19fc0f66f30a@31.76.80.69:2083?mode=auto&path=/?@MARAMBASHI_MARAMBASHI_MARAMBASHI_MARAMBASHI?ed=2048&security=reality&encryption=none&extra=",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "be0456b03c4b05c8b3724932ea521d955a440f4d8fb94284481c4f9f5adfdfe5": {
+      "config": "vless://06d44c57-8e1a-41f4-b9c4-65d35869e078@147.45.50.24:13868?security=reality&encryption=none&pbk=sgpya-5ohMKCjzyrDe4RWz7b8O9XegDzQ88oHCV45Gk&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=booking.com&sid=e852dc#@filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "f3e2c5b5955ad18868d02397a505fcf4b0e34727ab76ee17edc0acbbb89f54be": {
+      "config": "vless://5c22dd50-f75d-4cf5-ba53-721f91d8bfe1@193.233.255.32:443?security=reality&encryption=none&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=fr.sellflow.org#@filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "33cc35425874a4484514fad77d0c7a2db8425a60eeee66bc7c245040b5e1299e": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.201:8080#@filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "f19c8faaa28046931502a5e1dbb6398f294b08c7f0d9e53be3fbcb93cb3eb830": {
+      "config": "vless://e15b0798-45e6-4a02-8385-80dc4b0faa70@222.167.211.96:443?security=reality&encryption=none&pbk=S9oBz3oVyOuJw_3wXR1YGLbL7YUY9uyE96sE-YioSBE&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=littlechoice.whit3.net&sid=e43c750c515a4185#@filembad",
+      "created_at": 1786971503,
+      "source": "https://t.me/filembad"
+    },
+    "8d59c362afe7d657643cae32221efe89a0e3343efba91bfb5a05778634c8d78a": {
+      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=%2FzyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF%20%D8%B1%D8%A7%DB%8C%DA%AF%D8%A7%D9%86%20%DA%86%D9%86%D9%84%20%D8%AA%D9%84%DA%AF%D8%B1%D8%A7%D9%85%20%D9%85%D8%B3%DB%8C%D8%B1%20%D8%B3%D9%81%DB%8C%D8%AF%20%F0%9F%95%8A",
+      "created_at": 1786971503,
+      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
+    },
+    "502f50ec265378c8ee0782b089e67244708609fd83b2e943e34f90b788fcbf6b": {
+      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=%2FzyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#%E2%AD%90%EF%B8%8F%D8%B2%D9%85%D8%A7%D9%86%20%D8%A8%D8%B1%D9%88%D8%B2%D8%B1%D8%B3%D8%A7%D9%86%DB%8C%20%3A%20%DB%B2%DB%B2%20%D8%AE%D8%B1%D8%AF%D8%A7%D8%AF%20%D8%B3%D8%A7%D8%B9%D8%AA%20%DB%B2%DB%B0%3A%DB%B2%DB%B0%E2%AD%90%EF%B8%8F",
+      "created_at": 1786971503,
+      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
+    },
+    "d084f72b1f2aa1681b137ac407916d365b81ecf00704f4adf4818b960be1af65": {
+      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=/zyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#کانفیگ",
+      "created_at": 1786971503,
+      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
+    },
+    "9254d8b42b47da69380016148df1d546781c7d202a4ad2a04c91dcccaf55eba1": {
+      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=/zyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#⭐️زمان",
+      "created_at": 1786971503,
       "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
     }
   }
