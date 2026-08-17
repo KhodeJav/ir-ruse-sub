@@ -353,6 +353,23 @@ Collect
 
 ---
 
+## ⭐ Support | حمایت از پروژه
+اگر IR-RUSE را مفید می‌دانید، یک ⭐️ به مخزن بدهید.
+به رشد پروژه کمک می کند.
+---
+
+<div align="center">
+
+### ⚡ IR-RUSE
+
+**Collect · Extract · Update · Subscribe**
+
+Telegram: **@iR_RUSE**
+
+</div>
+
+---
+
 # 🇬🇧 English
 
 ## ⚡ What is IR-RUSE?
