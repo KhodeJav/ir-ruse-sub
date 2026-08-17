@@ -1,6 +1,6 @@
 {
   "telegram": {
-    "2025442005": 165819,
+    "2025442005": 165820,
     "4388653422": 1,
     "2211787746": 33352
   },
@@ -1229,6 +1229,46 @@
       "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=/zyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#⭐️زمان",
       "created_at": 1786971503,
       "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
+    },
+    "9d7f5df4e82f04e87324c448657d48532e32b749a527e8062a6853203ffa2adb": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@15.224.157.217:22222?security=none&encryption=none&headerType=none&type=tcp#%40filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "c4834f521a71ae5bf401b38cfad7f7d951e92467e0ca1c052435f4671492bd36": {
+      "config": "vless://7d2bac5e-6ff9-45c9-844e-6bfc5a384a42@146.103.122.129:443?security=reality&encryption=none&pbk=lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=nl1.orpheous.ru&sid=9e4eced6e98ed4d4#%40filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "e9bc637506c3484e10b32557c61314548177ae34902b92558f0756d5ea4c9c8b": {
+      "config": "vless://bfd814a8-d377-4324-b23e-10d9dcd0a988@176.65.151.215:8443?security=none&encryption=none&headerType=none&type=tcp#%40filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "2621459f1b0392de907835f04178a1e3900a87134806efabb937b7429905edb6": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@3.74.36.201:22222?security=none&encryption=none&headerType=none&type=tcp#%40filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "051db0c38e6b931cb5cb06e9c99d3d0735d3436271300e51b06871f1de528722": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@15.224.157.217:22222?security=none&encryption=none&headerType=none&type=tcp#@filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "47f3512803399eb49c339bbde1743ddd044efc225e9947c6a6928cc6f1f780f8": {
+      "config": "vless://7d2bac5e-6ff9-45c9-844e-6bfc5a384a42@146.103.122.129:443?security=reality&encryption=none&pbk=lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=nl1.orpheous.ru&sid=9e4eced6e98ed4d4#@filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "f5b569ec0fedfe92ca5193e473f23d80446609c5b4ca75377ac259e3fd35bd8a": {
+      "config": "vless://bfd814a8-d377-4324-b23e-10d9dcd0a988@176.65.151.215:8443?security=none&encryption=none&headerType=none&type=tcp#@filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
+    },
+    "fa4008cea75de34cf84725d89447ba6ea84c19efb92ce21bc32568880e5d7784": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@3.74.36.201:22222?security=none&encryption=none&headerType=none&type=tcp#@filembad",
+      "created_at": 1786971754,
+      "source": "https://t.me/filembad"
     }
   }
 }
