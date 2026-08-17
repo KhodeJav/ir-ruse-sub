@@ -21,7 +21,7 @@ https://raw.githubusercontent.com/KhodeJav/ir-ruse-sub/main/output/subscription.
 
 ## ✨ Features | امکانات
 
-* 📢 دریافت کانفیگ از کانال‌های Telegram <
+> 📢 دریافت کانفیگ از کانال‌های Telegram
 * 🔗 دریافت از Subscription URL
 * ⚡ پشتیبانی از VLESS، VMess، Trojan، Shadowsocks و SSR
 * 🔐 تشخیص Base64
