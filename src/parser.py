@@ -1,88 +1,193 @@
 import base64
-import json
 import re
-from urllib.parse import quote, urlsplit, urlunsplit
+from urllib.parse import unquote
 
-PROTOCOLS = ("vless://", "vmess://", "trojan://", "ss://")
-REMARK = "T.me/iR_RUSE | کانال ما"
 
-def extract_raw_configs(text: str) -> list[str]:
-    if not text:
-        return []
-    pattern = re.compile(r"(?:vless|vmess|trojan|ss)://[^\s<>'\"`]+", re.IGNORECASE)
-    results = []
-    for value in pattern.findall(text):
-        results.append(value.strip().rstrip(".,;)]}>"))
-    return results
+PROTOCOLS = (
+    "vless://",
+    "vmess://",
+    "trojan://",
+    "ss://",
+    "ssr://",
+    "socks://",
+    "socks5://",
+    "http://",
+    "https://",
+)
 
-def decode_possible_base64(text: str) -> str:
-    text = text.strip()
+URI_PATTERN = re.compile(
+    r"""
+    (?:
+        vless|vmess|trojan|ss|ssr|socks|socks5
+    )
+    ://
+    [^\s<>"'`\]\[(){}]+
+    """,
+    re.IGNORECASE | re.VERBOSE,
+)
+
+
+def clean_text(text: str) -> str:
     if not text:
         return ""
+
+    # Telegram markdown / quote / code formatting
+    text = text.replace("\r\n", "\n")
+    text = text.replace("\r", "\n")
+
+    # Unicode های نامرئی
+    invisible = (
+        "\u200b",
+        "\u200c",
+        "\u200d",
+        "\u2060",
+        "\ufeff",
+    )
+
+    for char in invisible:
+        text = text.replace(char, "")
+
+    # URL encode مثل %3A%2F%2F
     try:
-        padding = "=" * (-len(text) % 4)
-        decoded = base64.b64decode(text + padding, validate=False)
-        result = decoded.decode("utf-8", errors="ignore")
-        if any(proto in result.lower() for proto in PROTOCOLS):
-            return result
+        decoded = unquote(text)
+
+        if decoded != text:
+            text += "\n" + decoded
     except Exception:
         pass
-    return ""
+
+    return text
+
 
 def extract_configs(text: str) -> list[str]:
-    configs = extract_raw_configs(text)
-    if configs:
-        return configs
-    decoded = decode_possible_base64(text)
-    return extract_raw_configs(decoded) if decoded else []
+    """
+    استخراج مستقیم کانفیگ‌ها از متن.
 
-def normalize_vmess(config: str) -> str:
+    فرمت‌های Telegram Markdown / Quote / Code
+    اهمیتی ندارند؛ چون در نهایت متن خام بررسی می‌شود.
+    """
+
+    if not text:
+        return []
+
+    text = clean_text(text)
+
+    configs = []
+
+    # --------------------------------------------------
+    # استخراج مستقیم URI
+    # --------------------------------------------------
+
+    for match in URI_PATTERN.finditer(text):
+        config = match.group(0)
+
+        # کاراکترهای انتهایی که جزو URI نیستند
+        config = config.rstrip(
+            ".,;:!?)]}>\"'`"
+        )
+
+        if config:
+            configs.append(config)
+
+    # --------------------------------------------------
+    # استخراج VMess Base64
+    # --------------------------------------------------
+
+    for token in re.findall(
+        r"(?:vmess://)?([A-Za-z0-9+/=_-]{40,})",
+        text,
+    ):
+        decoded = decode_base64(token)
+
+        if not decoded:
+            continue
+
+        if (
+            "v" in decoded
+            and (
+                "add" in decoded
+                or "host" in decoded
+                or "port" in decoded
+            )
+        ):
+            configs.append(
+                "vmess://" + token
+            )
+
+    # --------------------------------------------------
+    # استخراج Base64 عمومی که داخلش URI وجود دارد
+    # --------------------------------------------------
+
+    for token in re.findall(
+        r"\b[A-Za-z0-9+/=_-]{50,}\b",
+        text,
+    ):
+        decoded = decode_base64(token)
+
+        if not decoded:
+            continue
+
+        for match in URI_PATTERN.finditer(decoded):
+            config = match.group(0).rstrip(
+                ".,;:!?)]}>\"'`"
+            )
+
+            if config:
+                configs.append(config)
+
+    # --------------------------------------------------
+    # پاکسازی و Deduplicate
+    # --------------------------------------------------
+
+    result = []
+    seen = set()
+
+    for config in configs:
+        config = config.strip()
+
+        if not config:
+            continue
+
+        # Telegram ممکن است % encoding داشته باشد.
+        # اما خود config را دستکاری نمی‌کنیم.
+        key = config
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        result.append(config)
+
+    return result
+
+
+def decode_base64(value: str) -> str | None:
     try:
-        payload = config[len("vmess://"):]
-        padding = "=" * (-len(payload) % 4)
-        raw = base64.b64decode(payload + padding).decode("utf-8", errors="ignore")
-        data = json.loads(raw)
-        if not isinstance(data, dict):
-            return config
-        data["ps"] = REMARK
-        encoded = base64.b64encode(
-            json.dumps(data, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
-        ).decode()
-        return "vmess://" + encoded
-    except Exception:
-        return config
+        value = value.strip()
 
-def normalize_uri_remark(config: str) -> str:
-    try:
-        parts = urlsplit(config)
-        if not parts.scheme:
-            return config
-        return urlunsplit((parts.scheme, parts.netloc, parts.path, parts.query, quote(REMARK, safe="")))
-    except Exception:
-        return config
+        # URL-safe Base64
+        value = value.replace("-", "+")
+        value = value.replace("_", "/")
 
-def normalize_config(config: str) -> str:
-    config = config.strip()
-    low = config.lower()
-    if low.startswith("vmess://"):
-        return normalize_vmess(config)
-    if low.startswith(("vless://", "trojan://", "ss://")):
-        return normalize_uri_remark(config)
-    return config
+        padding = len(value) % 4
 
-def canonical_config(config: str) -> str:
-    """Canonical representation used for duplicate detection; ignores the remark."""
-    config = config.strip()
-    try:
-        parts = urlsplit(config)
-        if parts.scheme.lower() == "vmess":
-            payload = config[len("vmess://"):]
-            padding = "=" * (-len(payload) % 4)
-            raw = base64.b64decode(payload + padding).decode("utf-8", errors="ignore")
-            data = json.loads(raw)
-            if isinstance(data, dict):
-                data.pop("ps", None)
-                return json.dumps(data, sort_keys=True, separators=(",", ":"))
-        return urlunsplit((parts.scheme.lower(), parts.netloc, parts.path, parts.query, "")).lower()
+        if padding:
+            value += "=" * (4 - padding)
+
+        raw = base64.b64decode(
+            value,
+            validate=False,
+        )
+
+        decoded = raw.decode(
+            "utf-8",
+            errors="ignore",
+        ).strip()
+
+        if not decoded:
+            return None
+
+        return decoded
+
     except Exception:
-        return config.lower()
+        return None
