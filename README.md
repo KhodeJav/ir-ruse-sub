@@ -22,15 +22,23 @@ https://raw.githubusercontent.com/KhodeJav/ir-ruse-sub/main/output/subscription.
 ## ✨ Features | امکانات
 
 > **📢 دریافت کانفیگ از کانال‌های Telegram**
-> 🔗 دریافت از Subscription URL
+
+>🔗 دریافت از Subscription URL
 
 > ⚡ پشتیبانی از VLESS، VMess، Trojan، Shadowsocks و SSR
+
 > 🔐 تشخیص Base64
+
 > 🧩 استخراج کانفیگ از متن، Code، Mono و Quote
+
 > ♻️ حذف کانفیگ‌های تکراری
+
 > 🧹 حذف خودکار کانفیگ‌های قدیمی
+
 > 🤖 بروزرسانی خودکار با GitHub Actions
+
 > 🖥️ بدون نیاز به VPS
+
 > 🔗 یک لینک Subscription برای استفاده در کلاینت
 
 ---
