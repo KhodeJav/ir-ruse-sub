@@ -23,6 +23,7 @@ https://raw.githubusercontent.com/KhodeJav/ir-ruse-sub/main/output/subscription.
 
 > **📢 دریافت کانفیگ از کانال‌های Telegram**
 > 🔗 دریافت از Subscription URL
+
 > ⚡ پشتیبانی از VLESS، VMess، Trojan، Shadowsocks و SSR
 > 🔐 تشخیص Base64
 > 🧩 استخراج کانفیگ از متن، Code، Mono و Quote
