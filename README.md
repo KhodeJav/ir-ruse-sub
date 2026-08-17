@@ -223,7 +223,7 @@ Source C ──┘
 ```text
 New Config
     ↓
-   48h
+   2h
     ↓
 Remove
 ```
@@ -515,7 +515,7 @@ Source C ──┘
 Configurations expire after:
 
 ```text
-48 Hours
+2 Hours
 ```
 
 This keeps the subscription fresh and prevents unlimited growth.
