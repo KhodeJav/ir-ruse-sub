@@ -216,7 +216,7 @@ Source C ──┘
 برای جلوگیری از باقی ماندن کانفیگ‌های قدیمی، کانفیگ‌ها پس از:
 
 ```text
-2 Hours
+5 Hours
 ```
 
 به‌صورت خودکار حذف می‌شوند.
@@ -224,7 +224,7 @@ Source C ──┘
 ```text
 New Config
     ↓
-   2h
+   5h
     ↓
 Remove
 ```
@@ -534,7 +534,7 @@ Source C ──┘
 Configurations expire after:
 
 ```text
-2 Hours
+5 Hours
 ```
 
 This keeps the subscription fresh and prevents unlimited growth.
