@@ -1,19 +1,14 @@
 {
   "telegram": {
-    "2025442005": 165919,
+    "2025442005": 165920,
     "4388653422": 2,
     "2211787746": 33361,
     "3744627358": 51917,
     "1836809801": 9226,
-    "1694914385": 20466,
+    "1694914385": 20468,
     "1512034774": 432180
   },
   "configs": {
-    "938ed825622667025b688989de429f2619428cdadb8bc01dd10e7418a579eb24": {
-      "config": "vmess://eyJhZGQiOiIxNTYuMjQ1LjIzMi4yMzkiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiYjE1ZTQ4MWQtMTdlNC00MWE4LTg0YzItMjNkNGYwNTE0ZDlhIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIzNTA0MyIsInBzIjoiQGZpbGVtYmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9#Telegram%20%40iR_RUSE",
-      "created_at": 1787064394,
-      "source": "https://t.me/filembad"
-    },
     "fe9728be4b7c369251b65645fdc29ec7da0939290c83ac2ad49cb95c2aa6f05b": {
       "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@18.193.240.71:22223?security=none&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
       "created_at": 1787067651,
