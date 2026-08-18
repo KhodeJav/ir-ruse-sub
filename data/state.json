@@ -1,6 +1,6 @@
 {
   "telegram": {
-    "2025442005": 165886,
+    "2025442005": 165887,
     "4388653422": 2,
     "2211787746": 33358,
     "3744627358": 51714,
@@ -1598,6 +1598,16 @@
       "config": "vless://f2e34580-1238-d1f7-1fc0-180ce34c7903@69.46.46.123:443?path=/ws/f2e34580-1238-d1f7-1fc0-180ce34c7903&security=tls&alpn=http/1.1&encryption=none&insecure=0&host=x4g-production-518a.up.railway.app&fp=chrome&type=ws&allowInsecure=0&sni=x4g-production-518a.up.railway.app#Telegram%20%40iR_RUSE",
       "created_at": 1787052871,
       "source": "https://t.me/v2ray_dalghak"
+    },
+    "93acd952657bcd97276f65cc767a034e9d5ba35b547aef646c918df62fe921f9": {
+      "config": "vless://423b1d79-08c4-403f-9d5e-c541f791b55f@189.74.124.42:443?security=reality&encryption=none&pbk=YQTixaXzPVImuRc4TUbrFAekjIiaYV-t5S-HTKlH0AU&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=nordic.cendora.ru&sid=2186a755ed67b034#Telegram%20%40iR_RUSE",
+      "created_at": 1787054156,
+      "source": "https://t.me/filembad"
+    },
+    "e5009d1455816893a2d6cf3b67d69fb44852dd4a4ae620154c3e2551fb45f72d": {
+      "config": "vless://042a4a95-68f5-4179-89b3-69475a5d4908@91.132.161.245:18456?security=reality&encryption=none&pbk=XmOcGjsWDWRVvRTF7rV77kRp63qwIYbQ_s-YK3U7FkM&headerType=none&fp=firefox&spx=/d1391238c7e6e89&type=tcp&sni=shop-eu-de.amd.com&sid=09#Telegram%20%40iR_RUSE",
+      "created_at": 1787054156,
+      "source": "https://t.me/filembad"
     }
   }
 }
