@@ -32,6 +32,20 @@ CONFIGS_FILE = OUTPUT_DIR / "configs.txt"
 
 
 # ============================================================
+# Collector Retry Settings
+# ============================================================
+
+# حداکثر تعداد تلاش برای هر Source
+MAX_RETRIES = 3
+
+# فاصله بین تلاش‌ها
+RETRY_DELAYS = (
+    3,
+    7,
+)
+
+
+# ============================================================
 # Sources
 # ============================================================
 
@@ -74,7 +88,7 @@ def load_sources():
 
 
 # ============================================================
-# Safe file writer
+# Safe output writer
 # ============================================================
 
 def safe_write_text(
@@ -82,8 +96,7 @@ def safe_write_text(
     content: str,
 ):
     """
-    فایل را به صورت اتمیک می‌نویسد تا در صورت قطع شدن
-    GitHub Actions فایل خراب یا ناقص ایجاد نشود.
+    فایل خروجی را به صورت اتمیک می‌نویسد.
     """
 
     path.parent.mkdir(
@@ -104,7 +117,9 @@ def safe_write_text(
         ) as f:
             f.write(content)
             f.flush()
-            os.fsync(f.fileno())
+            os.fsync(
+                f.fileno()
+            )
 
         os.replace(
             temp_path,
@@ -224,13 +239,10 @@ def get_tehran_datetime():
 # Remaining time until oldest config expires
 # ============================================================
 
-# باید با storage.py یکی باشد
-MAX_AGE_SECONDS = 5 * 60 * 60
+MAX_AGE_SECONDS = 4 * 60 * 60
 
 
-def get_expiration_info(
-    state: dict,
-) -> str:
+def get_expiration_info(state: dict) -> str:
     """
     زمان باقی‌مانده تا حذف قدیمی‌ترین کانفیگ فعلی را نمایش می‌دهد.
     """
@@ -311,6 +323,344 @@ def get_expiration_info(
 
 
 # ============================================================
+# Generic retry helper
+# ============================================================
+
+async def retry_async(
+    operation,
+    source_name: str,
+    timeout: int,
+    max_retries: int = MAX_RETRIES,
+):
+    """
+    اجرای یک Source با حداکثر 3 تلاش.
+
+    نتیجه:
+        ("success", result)
+        ("empty", None)
+        ("failed", None)
+
+    Empty به معنی خطا نیست.
+    """
+
+    last_error = None
+
+    for attempt in range(
+        1,
+        max_retries + 1,
+    ):
+
+        try:
+
+            print(
+                f"[INFO] {source_name} "
+                f"attempt {attempt}/{max_retries}",
+                flush=True,
+            )
+
+            result = await asyncio.wait_for(
+                operation(),
+                timeout=timeout,
+            )
+
+            # ------------------------------------------------
+            # No new configs = successful source
+            # ------------------------------------------------
+
+            if not result:
+
+                print(
+                    f"[INFO] {source_name} "
+                    "returned no new configs -> skipped",
+                    flush=True,
+                )
+
+                return "empty", []
+
+            # ------------------------------------------------
+            # Success
+            # ------------------------------------------------
+
+            print(
+                f"[INFO] {source_name} "
+                f"success -> {len(result)} configs",
+                flush=True,
+            )
+
+            return "success", result
+
+        except asyncio.TimeoutError as e:
+
+            last_error = e
+
+            print(
+                f"[WARNING] {source_name} "
+                f"timeout on attempt "
+                f"{attempt}/{max_retries}",
+                flush=True,
+            )
+
+        except Exception as e:
+
+            last_error = e
+
+            print(
+                f"[WARNING] {source_name} "
+                f"failed on attempt "
+                f"{attempt}/{max_retries}: "
+                f"{type(e).__name__}: {e}",
+                flush=True,
+            )
+
+        # ----------------------------------------------------
+        # Retry delay
+        # ----------------------------------------------------
+
+        if attempt < max_retries:
+
+            delay_index = min(
+                attempt - 1,
+                len(RETRY_DELAYS) - 1,
+            )
+
+            delay = RETRY_DELAYS[
+                delay_index
+            ]
+
+            print(
+                f"[INFO] Retrying {source_name} "
+                f"in {delay} seconds...",
+                flush=True,
+            )
+
+            await asyncio.sleep(
+                delay
+            )
+
+    # --------------------------------------------------------
+    # All retries failed
+    # --------------------------------------------------------
+
+    print(
+        f"[WARNING] {source_name} "
+        f"failed after {max_retries} attempts -> skipped",
+        flush=True,
+    )
+
+    return "failed", []
+
+
+# ============================================================
+# Telegram fail-safe collector
+# ============================================================
+
+async def collect_telegram_safe(
+    telegram_channels,
+    api_id,
+    api_hash,
+    session_string,
+    state,
+):
+    """
+    ابتدا رفتار اصلی Batch Collector را حفظ می‌کند.
+
+    اگر Batch موفق شود:
+        همان نتیجه استفاده می‌شود.
+
+    اگر Batch خطا/Timeout شود:
+        هر Channel به صورت جداگانه
+        با 3 Retry اجرا می‌شود.
+    """
+
+    if not telegram_channels:
+        return []
+
+    # --------------------------------------------------------
+    # Existing batch behavior
+    # --------------------------------------------------------
+
+    async def batch_operation():
+        return await collect_telegram(
+            int(api_id),
+            api_hash,
+            session_string,
+            telegram_channels,
+            state,
+        )
+
+    batch_status, batch_result = (
+        await retry_async(
+            operation=batch_operation,
+            source_name="Telegram batch collector",
+            timeout=120,
+            max_retries=MAX_RETRIES,
+        )
+    )
+
+    # --------------------------------------------------------
+    # Batch success
+    # --------------------------------------------------------
+
+    if batch_status == "success":
+        return batch_result
+
+    # --------------------------------------------------------
+    # Batch returned empty
+    # --------------------------------------------------------
+
+    if batch_status == "empty":
+        return []
+
+    # --------------------------------------------------------
+    # Batch completely failed
+    # -> fallback to per-channel
+    # --------------------------------------------------------
+
+    print(
+        "[INFO] Telegram batch collector failed. "
+        "Switching to per-channel mode...",
+        flush=True,
+    )
+
+    collected = []
+
+    for channel in telegram_channels:
+
+        async def channel_operation(
+            channel=channel,
+        ):
+            return await collect_telegram(
+                int(api_id),
+                api_hash,
+                session_string,
+                [channel],
+                state,
+            )
+
+        status, result = await retry_async(
+            operation=channel_operation,
+            source_name=(
+                f"Telegram source {channel}"
+            ),
+            timeout=120,
+            max_retries=MAX_RETRIES,
+        )
+
+        if status == "success":
+            collected.extend(
+                result
+            )
+
+        elif status == "empty":
+            # بدون کانفیگ جدید
+            continue
+
+        else:
+            # شکست کامل همین Source
+            continue
+
+    return collected
+
+
+# ============================================================
+# Subscription fail-safe collector
+# ============================================================
+
+async def collect_subscriptions_safe(
+    subscription_urls,
+):
+    """
+    ابتدا رفتار اصلی Batch Collector را حفظ می‌کند.
+
+    اگر Batch خطا/Timeout شود:
+        هر URL جداگانه با 3 Retry اجرا می‌شود.
+    """
+
+    if not subscription_urls:
+        return []
+
+    # --------------------------------------------------------
+    # Existing batch behavior
+    # --------------------------------------------------------
+
+    async def batch_operation():
+        return await collect_subscriptions(
+            subscription_urls
+        )
+
+    batch_status, batch_result = (
+        await retry_async(
+            operation=batch_operation,
+            source_name=(
+                "Subscription batch collector"
+            ),
+            timeout=180,
+            max_retries=MAX_RETRIES,
+        )
+    )
+
+    # --------------------------------------------------------
+    # Batch success
+    # --------------------------------------------------------
+
+    if batch_status == "success":
+        return batch_result
+
+    # --------------------------------------------------------
+    # Batch empty
+    # --------------------------------------------------------
+
+    if batch_status == "empty":
+        return []
+
+    # --------------------------------------------------------
+    # Batch failed
+    # -> fallback per URL
+    # --------------------------------------------------------
+
+    print(
+        "[INFO] Subscription batch collector failed. "
+        "Switching to per-source mode...",
+        flush=True,
+    )
+
+    collected = []
+
+    for url in subscription_urls:
+
+        async def source_operation(
+            url=url,
+        ):
+            return await collect_subscriptions(
+                [url]
+            )
+
+        status, result = await retry_async(
+            operation=source_operation,
+            source_name=(
+                f"Subscription source {url}"
+            ),
+            timeout=60,
+            max_retries=MAX_RETRIES,
+        )
+
+        if status == "success":
+            collected.extend(
+                result
+            )
+
+        elif status == "empty":
+            # بدون کانفیگ جدید
+            continue
+
+        else:
+            # شکست کامل Source
+            continue
+
+    return collected
+
+
+# ============================================================
 # Generate outputs
 # ============================================================
 
@@ -375,7 +725,7 @@ def generate_subscription(
     )
 
     # --------------------------------------------------------
-    # Information configs
+    # Fake SOCKS5 information configs
     # --------------------------------------------------------
 
     info_configs = [
@@ -427,14 +777,17 @@ def generate_subscription(
     )
 
     # --------------------------------------------------------
-    # IMPORTANT:
-    # Always rewrite output files from current state
+    # Write subscription safely
     # --------------------------------------------------------
 
     safe_write_text(
         SUBSCRIPTION_FILE,
         encoded,
     )
+
+    # --------------------------------------------------------
+    # Human-readable output
+    # --------------------------------------------------------
 
     safe_write_text(
         CONFIGS_FILE,
@@ -461,13 +814,11 @@ async def async_main():
     # --------------------------------------------------------
 
     OUTPUT_DIR.mkdir(
-        parents=True,
-        exist_ok=True,
+        exist_ok=True
     )
 
     STATE_FILE.parent.mkdir(
-        parents=True,
-        exist_ok=True,
+        exist_ok=True
     )
 
     # --------------------------------------------------------
@@ -475,11 +826,16 @@ async def async_main():
     # --------------------------------------------------------
 
     try:
+
         state = load_state(
             str(STATE_FILE)
         )
 
-        if not isinstance(state, dict):
+        if not isinstance(
+            state,
+            dict,
+        ):
+
             print(
                 "[WARNING] Invalid state format. "
                 "Creating a new state.",
@@ -491,6 +847,7 @@ async def async_main():
             }
 
     except Exception as e:
+
         print(
             f"[WARNING] Failed to load state: {e}",
             flush=True,
@@ -505,11 +862,13 @@ async def async_main():
     # --------------------------------------------------------
 
     try:
+
         telegram_channels, subscription_urls = (
             load_sources()
         )
 
     except Exception as e:
+
         print(
             f"[ERROR] Failed to load sources.txt: {e}",
             flush=True,
@@ -535,9 +894,17 @@ async def async_main():
 
     telegram_configs = []
 
-    api_id = os.getenv("TG_API_ID")
-    api_hash = os.getenv("TG_API_HASH")
-    session_string = os.getenv("TG_SESSION")
+    api_id = os.getenv(
+        "TG_API_ID"
+    )
+
+    api_hash = os.getenv(
+        "TG_API_HASH"
+    )
+
+    session_string = os.getenv(
+        "TG_SESSION"
+    )
 
     if (
         telegram_channels
@@ -545,40 +912,28 @@ async def async_main():
         and api_hash
         and session_string
     ):
+
         print(
             "[INFO] Starting Telegram collector...",
             flush=True,
         )
 
         try:
-            telegram_configs = await asyncio.wait_for(
-                collect_telegram(
-                    int(api_id),
+
+            telegram_configs = (
+                await collect_telegram_safe(
+                    telegram_channels,
+                    api_id,
                     api_hash,
                     session_string,
-                    telegram_channels,
                     state,
-                ),
-                timeout=120,
+                )
             )
-
-            if not telegram_configs:
-                telegram_configs = []
-
-        except asyncio.TimeoutError:
-
-            print(
-                "[ERROR] Telegram collector timeout "
-                "(120 seconds). Continuing...",
-                flush=True,
-            )
-
-            telegram_configs = []
 
         except Exception as e:
 
             print(
-                f"[ERROR] Telegram collector failed: "
+                f"[ERROR] Telegram safe collector failed: "
                 f"{type(e).__name__}: {e}",
                 flush=True,
             )
@@ -605,30 +960,17 @@ async def async_main():
     subscription_configs = []
 
     try:
-        subscription_configs = await asyncio.wait_for(
-            collect_subscriptions(
+
+        subscription_configs = (
+            await collect_subscriptions_safe(
                 subscription_urls
-            ),
-            timeout=180,
+            )
         )
-
-        if not subscription_configs:
-            subscription_configs = []
-
-    except asyncio.TimeoutError:
-
-        print(
-            "[ERROR] Subscription collector timeout "
-            "(180 seconds). Continuing...",
-            flush=True,
-        )
-
-        subscription_configs = []
 
     except Exception as e:
 
         print(
-            f"[ERROR] Subscription collector failed: "
+            f"[ERROR] Subscription safe collector failed: "
             f"{type(e).__name__}: {e}",
             flush=True,
         )
@@ -658,7 +1000,7 @@ async def async_main():
     before = len(
         state.get(
             "configs",
-            {}
+            {},
         )
     )
 
@@ -681,7 +1023,7 @@ async def async_main():
     after = len(
         state.get(
             "configs",
-            {}
+            {},
         )
     )
 
@@ -740,30 +1082,6 @@ async def async_main():
     active.sort()
 
     # --------------------------------------------------------
-    # Save state FIRST
-    #
-    # مهم:
-    # ابتدا state جدید ذخیره می‌شود و سپس output ساخته می‌شود.
-    # --------------------------------------------------------
-
-    try:
-
-        save_state(
-            str(STATE_FILE),
-            state,
-        )
-
-    except Exception as e:
-
-        print(
-            f"[ERROR] Failed to save state: "
-            f"{type(e).__name__}: {e}",
-            flush=True,
-        )
-
-        return
-
-    # --------------------------------------------------------
     # Generate subscription + readable output
     # --------------------------------------------------------
 
@@ -778,6 +1096,27 @@ async def async_main():
 
         print(
             f"[ERROR] Failed to generate outputs: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        return
+
+    # --------------------------------------------------------
+    # Save state
+    # --------------------------------------------------------
+
+    try:
+
+        save_state(
+            str(STATE_FILE),
+            state,
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to save state: "
             f"{type(e).__name__}: {e}",
             flush=True,
         )
