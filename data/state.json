@@ -1,6 +1,6 @@
 {
   "telegram": {
-    "2025442005": 165860,
+    "2025442005": 165862,
     "4388653422": 2,
     "2211787746": 33355
   },
@@ -24,6 +24,16 @@
       "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=/zyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#Telegram%20%40iR_RUSE",
       "created_at": 1787022355,
       "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
+    },
+    "82f2b0dfe781880d0134c8467b7d81fdacf318c1501f4dd1220e2f9b6c0ca542": {
+      "config": "vless://423b1d79-08c4-403f-9d5e-c541f791b55f@83.143.112.146:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=YQTixaXzPVImuRc4TUbrFAekjIiaYV-t5S-HTKlH0AU&sid=2186a755ed67b034&sni=nordic.cendora.ru#Telegram%20%40iR_RUSE",
+      "created_at": 1787028476,
+      "source": "https://t.me/filembad"
+    },
+    "42bcd26cb4d552860879a27d792c98b6be8fa21c9b38eeac6ebafbb8d2e6e356": {
+      "config": "vless://423b1d79-08c4-403f-9d5e-c541f791b55f@83.143.112.146:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=YQTixaXzPVImuRc4TUbrFAekjIiaYV-t5S-HTKlH0AU&sid=2186a755ed67b034&sni=nordic.cendora.ru#Telegram%20%40iR_RUSE",
+      "created_at": 1787028476,
+      "source": "https://t.me/filembad"
     }
   }
 }
