@@ -22,11 +22,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
-    # Safety limit for the entire job
-    timeout-minutes: 20
-
     steps:
-
       # ----------------------------------------------------------
       # Checkout repository
       # ----------------------------------------------------------
@@ -36,7 +32,6 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
-          persist-credentials: true
 
       # ----------------------------------------------------------
       # Python
@@ -57,7 +52,6 @@ jobs:
         timeout-minutes: 5
         run: |
           python -m pip install --upgrade pip
-
           python -u -m pip install \
             --disable-pip-version-check \
             --prefer-binary \
@@ -79,16 +73,27 @@ jobs:
           echo "Collector finished."
 
       # ----------------------------------------------------------
-      # Verify generated files
+      # Check generated files
       # ----------------------------------------------------------
 
       - name: Verify generated files
         run: |
-          test -f data/state.json
-          test -f output/subscription.txt
-          test -f output/configs.txt
+          if [ ! -f data/state.json ]; then
+            echo "ERROR: data/state.json not found."
+            exit 1
+          fi
 
-          echo "Generated files:"
+          if [ ! -f output/subscription.txt ]; then
+            echo "ERROR: output/subscription.txt not found."
+            exit 1
+          fi
+
+          if [ ! -f output/configs.txt ]; then
+            echo "ERROR: output/configs.txt not found."
+            exit 1
+          fi
+
+          echo "Generated files verified:"
           ls -lh \
             data/state.json \
             output/subscription.txt \
@@ -116,23 +121,15 @@ jobs:
           git commit -m "Auto update subscription"
 
       # ----------------------------------------------------------
-      # Sync with remote
+      # Sync with remote and push
       # ----------------------------------------------------------
 
-      - name: Sync with remote
+      - name: Sync and push
         run: |
           git fetch origin main
-
           git rebase origin/main
 
-      # ----------------------------------------------------------
-      # Push
-      # ----------------------------------------------------------
-
-      - name: Push changes
-        run: |
           for attempt in 1 2 3; do
-
             echo "Push attempt ${attempt}/3..."
 
             if git push origin main; then
@@ -141,27 +138,13 @@ jobs:
             fi
 
             if [ "$attempt" -lt 3 ]; then
-              if [ "$attempt" -eq 1 ]; then
-                sleep 5
-              else
-                sleep 10
-              fi
+              echo "Push failed. Retrying..."
+              sleep $((attempt * 5))
 
               git fetch origin main
               git rebase origin/main
             fi
-
           done
 
-          echo "Push failed after 3 attempts."
+          echo "ERROR: Push failed after 3 attempts."
           exit 1
-
-      # ----------------------------------------------------------
-      # Final status
-      # ----------------------------------------------------------
-
-      - name: Final verification
-        run: |
-          echo "Workflow completed."
-          git status --short
-          git log -1 --oneline
