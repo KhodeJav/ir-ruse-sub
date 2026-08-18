@@ -1,3 +1,4 @@
+```yaml
 name: Update V2Ray Subscription
 
 on:
@@ -9,33 +10,68 @@ on:
   # Allow manual execution
   workflow_dispatch:
 
+
+# ============================================================
+# Permissions
+# ============================================================
+
 permissions:
   contents: write
 
-# Prevent multiple collector runs from working at the same time.
-# The next run waits for the previous one instead of cancelling it.
+
+# ============================================================
+# Concurrency
+# ============================================================
+
+# Prevent multiple collector runs from modifying
+# state/output at the same time.
+#
+# cancel-in-progress: false
+# یعنی Run جدید، Run قبلی را قطع نمی‌کند.
+#
+# توجه:
+# اگر یک Run بیش از حد طولانی شود، Run بعدی در صف می‌ماند.
+# برای همین خود Job/Collector هم timeout کنترل‌شده دارد.
+# ============================================================
+
 concurrency:
   group: update-subscription
   cancel-in-progress: false
 
+
+# ============================================================
+# Jobs
+# ============================================================
+
 jobs:
   update:
+
     runs-on: ubuntu-latest
 
+    # --------------------------------------------------------
+    # Absolute safety limit for the whole job
+    # --------------------------------------------------------
+
+    timeout-minutes: 20
+
+
     steps:
-      # ----------------------------------------------------------
+
+      # ======================================================
       # Checkout repository
-      # ----------------------------------------------------------
+      # ======================================================
 
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: main
+          persist-credentials: true
 
-      # ----------------------------------------------------------
+
+      # ======================================================
       # Python
-      # ----------------------------------------------------------
+      # ======================================================
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -44,61 +80,262 @@ jobs:
           cache: "pip"
           cache-dependency-path: requirements.txt
 
-      # ----------------------------------------------------------
+
+      # ======================================================
       # Dependencies
-      # ----------------------------------------------------------
+      # ======================================================
 
       - name: Install dependencies
         timeout-minutes: 5
         run: |
+          set -e
+
+          echo "Installing dependencies..."
+
           python -m pip install --upgrade pip
+
           python -u -m pip install \
             --disable-pip-version-check \
             --prefer-binary \
             -r requirements.txt
 
-      # ----------------------------------------------------------
+          echo "Dependencies installed successfully."
+
+
+      # ======================================================
       # Run collector
-      # ----------------------------------------------------------
+      # ======================================================
 
       - name: Run collector
-        timeout-minutes: 10
+        timeout-minutes: 15
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_SESSION: ${{ secrets.TG_SESSION }}
-        run: |
-          echo "Starting collector..."
-          python -u -m src.main
-          echo "Collector finished."
 
-      # ----------------------------------------------------------
+        run: |
+          set -e
+
+          echo "=========================================="
+          echo "Starting IR-RUSE collector..."
+          echo "=========================================="
+
+          python -u -m src.main
+
+          echo "=========================================="
+          echo "Collector finished."
+          echo "=========================================="
+
+
+      # ======================================================
+      # Verify generated files
+      # ======================================================
+
+      - name: Verify generated files
+        run: |
+          set -e
+
+          echo "=========================================="
+          echo "Checking generated files..."
+          echo "=========================================="
+
+          if [ ! -f "data/state.json" ]; then
+            echo "[ERROR] data/state.json does not exist."
+            exit 1
+          fi
+
+          if [ ! -f "output/subscription.txt" ]; then
+            echo "[ERROR] output/subscription.txt does not exist."
+            exit 1
+          fi
+
+          if [ ! -f "output/configs.txt" ]; then
+            echo "[ERROR] output/configs.txt does not exist."
+            exit 1
+          fi
+
+          echo ""
+          echo "File sizes:"
+
+          ls -lh \
+            data/state.json \
+            output/subscription.txt \
+            output/configs.txt
+
+          echo ""
+          echo "Generated files verified successfully."
+
+
+      # ======================================================
+      # Git status
+      # ======================================================
+
+      - name: Check git changes
+        run: |
+          echo "=========================================="
+          echo "Git status"
+          echo "=========================================="
+
+          git status --short
+
+          echo ""
+          echo "Generated file diff:"
+
+          git diff -- \
+            data/state.json \
+            output/subscription.txt \
+            output/configs.txt \
+            || true
+
+
+      # ======================================================
       # Commit generated files
-      # ----------------------------------------------------------
+      # ======================================================
 
       - name: Commit updated files
         run: |
+          set -e
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          echo "Adding generated files..."
 
           git add \
             data/state.json \
             output/subscription.txt \
             output/configs.txt
 
+          echo ""
+          echo "Staged changes:"
+
+          git status --short
+
+          # --------------------------------------------------
+          # No changes
+          # --------------------------------------------------
+
           if git diff --cached --quiet; then
-            echo "No changes."
+            echo ""
+            echo "No changes detected."
+            echo "Nothing to commit."
             exit 0
           fi
 
+          # --------------------------------------------------
+          # Commit
+          # --------------------------------------------------
+
+          echo ""
+          echo "Creating commit..."
+
           git commit -m "Auto update subscription"
 
-      # ----------------------------------------------------------
-      # Sync with remote and push
-      # ----------------------------------------------------------
+          echo ""
+          echo "Commit created successfully."
 
-      - name: Sync and push
+
+      # ======================================================
+      # Sync with remote
+      # ======================================================
+
+      - name: Sync with remote
         run: |
-          git fetch origin main
+          set -e
+
+          echo "=========================================="
+          echo "Syncing with origin/main..."
+          echo "=========================================="
+
+          git fetch --prune origin main
+
           git rebase origin/main
-          git push origin main
+
+          echo "Remote sync completed."
+
+
+      # ======================================================
+      # Push with retry
+      # ======================================================
+
+      - name: Push changes
+        run: |
+          set -e
+
+          echo "=========================================="
+          echo "Pushing changes..."
+          echo "=========================================="
+
+          MAX_PUSH_RETRIES=3
+
+          for attempt in $(seq 1 $MAX_PUSH_RETRIES); do
+
+            echo ""
+            echo "Push attempt ${attempt}/${MAX_PUSH_RETRIES}..."
+
+            if git push origin main; then
+
+              echo ""
+              echo "Push successful."
+              exit 0
+
+            fi
+
+            if [ "$attempt" -lt "$MAX_PUSH_RETRIES" ]; then
+
+              case "$attempt" in
+                1)
+                  delay=5
+                  ;;
+                2)
+                  delay=10
+                  ;;
+                *)
+                  delay=15
+                  ;;
+              esac
+
+              echo ""
+              echo "Push failed."
+              echo "Retrying in ${delay} seconds..."
+
+              sleep "$delay"
+
+              echo ""
+              echo "Refreshing remote state..."
+
+              git fetch --prune origin main
+
+              git rebase origin/main
+
+            fi
+
+          done
+
+          echo ""
+          echo "[ERROR] Failed to push after ${MAX_PUSH_RETRIES} attempts."
+          exit 1
+
+
+      # ======================================================
+      # Final verification
+      # ======================================================
+
+      - name: Final verification
+        run: |
+          echo "=========================================="
+          echo "Final repository status"
+          echo "=========================================="
+
+          git status --short
+
+          echo ""
+          echo "Latest commit:"
+
+          git log -1 --oneline
+
+          echo ""
+          echo "=========================================="
+          echo "Update workflow completed."
+          echo "=========================================="
+```
