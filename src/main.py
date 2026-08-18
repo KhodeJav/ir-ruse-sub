@@ -74,6 +74,54 @@ def load_sources():
 
 
 # ============================================================
+# Safe file writer
+# ============================================================
+
+def safe_write_text(
+    path: Path,
+    content: str,
+):
+    """
+    فایل را به صورت اتمیک می‌نویسد تا در صورت قطع شدن
+    GitHub Actions فایل خراب یا ناقص ایجاد نشود.
+    """
+
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    temp_path = path.with_suffix(
+        path.suffix + ".tmp"
+    )
+
+    try:
+        with open(
+            temp_path,
+            "w",
+            encoding="utf-8",
+            newline="\n",
+        ) as f:
+            f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+
+        os.replace(
+            temp_path,
+            path,
+        )
+
+    except Exception:
+        try:
+            if temp_path.exists():
+                temp_path.unlink()
+        except Exception:
+            pass
+
+        raise
+
+
+# ============================================================
 # Gregorian -> Jalali
 # ============================================================
 
@@ -176,10 +224,13 @@ def get_tehran_datetime():
 # Remaining time until oldest config expires
 # ============================================================
 
-MAX_AGE_SECONDS = 4 * 60 * 60
+# باید با storage.py یکی باشد
+MAX_AGE_SECONDS = 5 * 60 * 60
 
 
-def get_expiration_info(state: dict) -> str:
+def get_expiration_info(
+    state: dict,
+) -> str:
     """
     زمان باقی‌مانده تا حذف قدیمی‌ترین کانفیگ فعلی را نمایش می‌دهد.
     """
@@ -210,7 +261,6 @@ def get_expiration_info(state: dict) -> str:
                 - (now - created_at)
             )
 
-            # اگر قبلاً از زمان انقضا گذشته باشد
             if remaining < 0:
                 remaining = 0
 
@@ -227,7 +277,6 @@ def get_expiration_info(state: dict) -> str:
             "نامشخص"
         )
 
-    # کمترین زمان = قدیمی‌ترین کانفیگ
     remaining = min(
         remaining_times
     )
@@ -282,10 +331,6 @@ def generate_subscription(
 
     # --------------------------------------------------------
     # Statistics
-    #
-    # VLESS = only vless:// configs
-    # Trojan = only trojan:// configs
-    # All    = every config regardless of protocol
     # --------------------------------------------------------
 
     vless_count = sum(
@@ -330,16 +375,10 @@ def generate_subscription(
     )
 
     # --------------------------------------------------------
-    # Fake SOCKS5 information configs
-    #
-    # These ARE included in the user's subscription.
+    # Information configs
     # --------------------------------------------------------
 
     info_configs = [
-
-        # ----------------------------------------------------
-        # 1. Statistics
-        # ----------------------------------------------------
 
         (
             "socks5://127.0.0.1:1080"
@@ -348,20 +387,12 @@ def generate_subscription(
             f"📦 All: {all_count}"
         ),
 
-        # ----------------------------------------------------
-        # 2. Last update
-        # ----------------------------------------------------
-
         (
             "socks5://127.0.0.1:1081"
             f"#🗓️ تاریخ بروزرسانی: "
             f"{date_text} | "
             f"⏰ ساعت: {time_text}"
         ),
-
-        # ----------------------------------------------------
-        # 3. Expiration
-        # ----------------------------------------------------
 
         (
             "socks5://127.0.0.1:1082"
@@ -396,7 +427,8 @@ def generate_subscription(
     )
 
     # --------------------------------------------------------
-    # Write subscription safely
+    # IMPORTANT:
+    # Always rewrite output files from current state
     # --------------------------------------------------------
 
     safe_write_text(
@@ -404,13 +436,14 @@ def generate_subscription(
         encoded,
     )
 
-    # --------------------------------------------------------
-    # Human-readable output
-    # --------------------------------------------------------
-
     safe_write_text(
         CONFIGS_FILE,
         subscription_text,
+    )
+
+    print(
+        "[INFO] Output files updated successfully.",
+        flush=True,
     )
 
 
@@ -428,11 +461,13 @@ async def async_main():
     # --------------------------------------------------------
 
     OUTPUT_DIR.mkdir(
-        exist_ok=True
+        parents=True,
+        exist_ok=True,
     )
 
     STATE_FILE.parent.mkdir(
-        exist_ok=True
+        parents=True,
+        exist_ok=True,
     )
 
     # --------------------------------------------------------
@@ -500,17 +535,9 @@ async def async_main():
 
     telegram_configs = []
 
-    api_id = os.getenv(
-        "TG_API_ID"
-    )
-
-    api_hash = os.getenv(
-        "TG_API_HASH"
-    )
-
-    session_string = os.getenv(
-        "TG_SESSION"
-    )
+    api_id = os.getenv("TG_API_ID")
+    api_hash = os.getenv("TG_API_HASH")
+    session_string = os.getenv("TG_SESSION")
 
     if (
         telegram_channels
@@ -631,7 +658,7 @@ async def async_main():
     before = len(
         state.get(
             "configs",
-            {},
+            {}
         )
     )
 
@@ -654,8 +681,9 @@ async def async_main():
     after = len(
         state.get(
             "configs",
-            {}),
+            {}
         )
+    )
 
     print(
         f"[INFO] Added unique: "
@@ -712,6 +740,30 @@ async def async_main():
     active.sort()
 
     # --------------------------------------------------------
+    # Save state FIRST
+    #
+    # مهم:
+    # ابتدا state جدید ذخیره می‌شود و سپس output ساخته می‌شود.
+    # --------------------------------------------------------
+
+    try:
+
+        save_state(
+            str(STATE_FILE),
+            state,
+        )
+
+    except Exception as e:
+
+        print(
+            f"[ERROR] Failed to save state: "
+            f"{type(e).__name__}: {e}",
+            flush=True,
+        )
+
+        return
+
+    # --------------------------------------------------------
     # Generate subscription + readable output
     # --------------------------------------------------------
 
@@ -726,27 +778,6 @@ async def async_main():
 
         print(
             f"[ERROR] Failed to generate outputs: "
-            f"{type(e).__name__}: {e}",
-            flush=True,
-        )
-
-        return
-
-    # --------------------------------------------------------
-    # Save state
-    # --------------------------------------------------------
-
-    try:
-
-        save_state(
-            str(STATE_FILE),
-            state,
-        )
-
-    except Exception as e:
-
-        print(
-            f"[ERROR] Failed to save state: "
             f"{type(e).__name__}: {e}",
             flush=True,
         )
