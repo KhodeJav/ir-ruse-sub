@@ -1,12 +1,12 @@
 {
   "telegram": {
-    "2025442005": 165874,
+    "2025442005": 165878,
     "4388653422": 2,
-    "2211787746": 33356,
-    "3744627358": 51669,
-    "1836809801": 9217,
+    "2211787746": 33357,
+    "3744627358": 51684,
+    "1836809801": 9218,
     "1694914385": 20438,
-    "1512034774": 432175
+    "1512034774": 432176
   },
   "configs": {
     "82f2b0dfe781880d0134c8467b7d81fdacf318c1501f4dd1220e2f9b6c0ca542": {
@@ -2497,6 +2497,66 @@
     "0299eab15c06adc0e883f7992ccd23d3fe844b05872fc0ee5658b46771ce49e3": {
       "config": "vless://4f013568-a58b-4b04-b5dd-4d52bf1c33a4@173.245.58.75:443?encryption=none&security=tls&sni=amoosamiii.net&fp=chrome&insecure=0&allowInsecure=0&type=ws&host=amoosamiii.net&path=/poiuyws@ThePackageCom#Telegram%20%40iR_RUSE",
       "created_at": 1787043074,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "cb3fa529f28ea9519fcad614ef27f048ce36395088eddcd02a015d6d13af890e": {
+      "config": "vless://99d6bdee-1d04-455e-8ad9-43fc14b544b4@94.237.93.20:33651?security=&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/filembad"
+    },
+    "67299f4d98fe69ed99ada910c3a79a36e8846dbceb5dde2fd6d8c245c6214078": {
+      "config": "vless://8ff538e4-330c-43c1-97c8-0c90bf989331@77.237.90.67:443?security=reality&encryption=none&pbk=a7eDhoO14l6Tt6oC9Qa2laZkuJlQ8vhDgtE3Ko9aGnw&headerType=none&fp=chrome&spx=%2Fa7a31c8e82daa25&type=tcp&sni=www.samsung.com&sid=20f787f764e45d#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/filembad"
+    },
+    "dee5b914b3cdb352c249dfe86e8fa96beee7e012507bb5e93638a4f0dc99b37b": {
+      "config": "vless://99d6bdee-1d04-455e-8ad9-43fc14b544b4@94.237.93.20:33651?security=&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/filembad"
+    },
+    "a77f1ef272a7bb5cd8b385b0b8559043dfb53b4cf5b995d1889faad9949a24b5": {
+      "config": "vless://8ff538e4-330c-43c1-97c8-0c90bf989331@77.237.90.67:443?security=reality&encryption=none&pbk=a7eDhoO14l6Tt6oC9Qa2laZkuJlQ8vhDgtE3Ko9aGnw&headerType=none&fp=chrome&spx=/a7a31c8e82daa25&type=tcp&sni=www.samsung.com&sid=20f787f764e45d#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/filembad"
+    },
+    "052ae8f6ac22d06a05d7103d3c75252d5f9e34aee444e0162a3e3b564bd975b9": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.187.235.95:22223?encryption=none&security=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "a8f49ee62a2c1e1e4716efaee49a63830cf11e0b45347e9d099dba3ffb499823": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.187.235.95:22224?encryption=none&security=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "4ceb2372b022558524a524eeba43c3ea4c4513f9147cb2bc9a2e62dbc83f7ad3": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.187.235.95:22222?encryption=none&security=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "972e1677150f40ae976b8d12f23f944e74515617580a94785872d3b3d9fc1dbf": {
+      "config": "vmess://eyJhZGQiOiAiODIuMTk4LjI0Ni4yMzMiLCAiYWlkIjogIjAiLCAiYWxwbiI6ICIiLCAiZnAiOiAiIiwgImhvc3QiOiAidjJyYXlOcGx1cy0tdjJyYXlOcGx1cy0tdjJyYXlOcGx1cyIsICJpZCI6ICJkMTNmYzJmNS0zZTA1LTQ3OTUtODFlYi00NDE0M2EwOWU1NTIiLCAibmV0IjogInRjcCIsICJwYXRoIjogIiIsICJwb3J0IjogIjE4MCIsICJwcyI6ICJcdWQ4M2NcdWRmOGEgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogIiIsICJ0bHMiOiAiIiwgInR5cGUiOiAibm9uZSIsICJ2IjogIjIifQ==#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "971852986b786a2c7f71d41db8c46e670003094b108855aa28582e547f50a1fc": {
+      "config": "vmess://eyJhZGQiOiAiMTY1LjE0MC4yMTYuMTQyIiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjogIiIsICJob3N0IjogIiIsICJpZCI6ICJiNjVhMmQ2OS01NjM0LTQyYTItZTRiZS01NGU4YTYxNzY5MDAiLCAibmV0IjogInRjcCIsICJwYXRoIjogIi9MZXZpa29Db25maWciLCAicG9ydCI6ICI0NDMiLCAicHMiOiAiXHUyNzA4XHVmZTBmIEB2MnJheV9EYWxnaGFrIiwgInNjeSI6ICJhdXRvIiwgInNuaSI6ICIiLCAidGxzIjogIiIsICJ0eXBlIjogIm5vbmUiLCAidiI6ICIyIn0=#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "151d222c57a4898f3df9038fdc4c04353bf05bbd1e2a9b3229fe0db808097f99": {
+      "config": "vmess://eyJhZGQiOiAiODIuMTk4LjI0Ni4zNyIsICJhaWQiOiAiMCIsICJhbHBuIjogIiIsICJmcCI6ICIiLCAiaG9zdCI6ICJmcmE1LmNoYXNlbTIwMjZzdWQuY29tIiwgImlkIjogImQxM2ZjMmY1LTNlMDUtNDc5NS04MWViLTQ0MTQzYTA5ZTU1MiIsICJuZXQiOiAidGNwIiwgInBhdGgiOiAiLyIsICJwb3J0IjogIjE4MCIsICJwcyI6ICJcdWQ4M2RcdWRjYWIgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogImZyYTUuY2hhc2VtMjAyNnN1ZC5jb20iLCAidGxzIjogIiIsICJ0eXBlIjogIm5vbmUiLCAidiI6ICIyIn0=#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "80644f7db1f93d915cbc3489c95e4fb44978ffc7a4b6f9ef0041c17b2d3f01ff": {
+      "config": "vmess://eyJhZGQiOiAiNjYuMTYzLjExNy41OCIsICJhaWQiOiAiMCIsICJhbHBuIjogIiIsICJmcCI6ICIiLCAiaG9zdCI6ICIiLCAiaWQiOiAiMDQ2MjFiYWUtYWIzNi0xMWVjLWI5MDktMDI0MmFjMTIwMDAyIiwgIm5ldCI6ICJ0Y3AiLCAicGF0aCI6ICIiLCAicG9ydCI6ICIyMjMyNCIsICJwcyI6ICJcdWQ4M2VcdWRkMzlcdTIwMGRcdTI2NDBcdWZlMGYgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogIiIsICJ0bHMiOiAiIiwgInR5cGUiOiAibm9uZSIsICJ2IjogIjIifQ==#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "acb272aa58ef0c31b8a26b7cef1365fab9bb9884f6c774f0ffd6411bc3b9945a": {
+      "config": "vmess://eyJhZGQiOiAiMTY1LjE0MC4yMTYuMTQxIiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjogIiIsICJob3N0IjogIiIsICJpZCI6ICJlN2Q3MmE4ZC0yNmYyLTRiNTQtYjM2Ni0wYzQzZTBiY2JhN2QiLCAibmV0IjogInRjcCIsICJwYXRoIjogIiIsICJwb3J0IjogIjQ0MyIsICJwcyI6ICJcdWQ4M2NcdWRjY2YgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogIiIsICJ0bHMiOiAiIiwgInR5cGUiOiAibm9uZSIsICJ2IjogIjIifQ==#Telegram%20%40iR_RUSE",
+      "created_at": 1787046355,
       "source": "https://t.me/v2ray_dalghak"
     }
   }
