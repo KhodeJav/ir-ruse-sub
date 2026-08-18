@@ -276,11 +276,16 @@ def generate_subscription(
     configs = [
         config.strip()
         for config in configs
-        if config and config.strip()
+        if isinstance(config, str)
+        and config.strip()
     ]
 
     # --------------------------------------------------------
     # Statistics
+    #
+    # VLESS = only vless:// configs
+    # Trojan = only trojan:// configs
+    # All    = every config regardless of protocol
     # --------------------------------------------------------
 
     vless_count = sum(
@@ -317,10 +322,8 @@ def generate_subscription(
         get_expiration_info(state)
     )
 
-    # فقط مقدار زمان را برای Remark برمی‌داریم
     expiration_text = (
-        expiration_info
-        .replace(
+        expiration_info.replace(
             "حذف کانفیگ‌های قدیمی: ",
             "",
         )
@@ -329,39 +332,51 @@ def generate_subscription(
     # --------------------------------------------------------
     # Fake SOCKS5 information configs
     #
-    # These are intentionally included in the user
-    # subscription so clients can display the information.
+    # These ARE included in the user's subscription.
     # --------------------------------------------------------
 
     info_configs = [
+
+        # ----------------------------------------------------
+        # 1. Statistics
+        # ----------------------------------------------------
+
         (
             "socks5://127.0.0.1:1080"
-            f"#VLESS: {vless_count} | "
-            f"Trojan: {trojan_count} | "
-            f"All: {all_count}"
+            f"#📊 VLESS: {vless_count} | "
+            f"🟣 Trojan: {trojan_count} | "
+            f"📦 All: {all_count}"
         ),
+
+        # ----------------------------------------------------
+        # 2. Last update
+        # ----------------------------------------------------
 
         (
             "socks5://127.0.0.1:1081"
-            f"#آخرین بروزرسانی: "
-            f"{date_text} - {time_text}"
+            f"#🗓️ تاریخ بروزرسانی: "
+            f"{date_text} | "
+            f"⏰ ساعت: {time_text}"
         ),
+
+        # ----------------------------------------------------
+        # 3. Expiration
+        # ----------------------------------------------------
 
         (
             "socks5://127.0.0.1:1082"
-            f"#زمان تقریبی حذف شدن کانفیگ‌ها: "
+            f"#⏳ زمان تقریبی حذف شدن کانفیگ‌ها: "
             f"{expiration_text}"
         ),
     ]
 
     # --------------------------------------------------------
     # Build subscription
-    #
-    # Information configs are included for users.
     # --------------------------------------------------------
 
     subscription_configs = (
-        info_configs + configs
+        info_configs
+        + configs
     )
 
     subscription_text = "\n".join(
@@ -373,21 +388,29 @@ def generate_subscription(
     # --------------------------------------------------------
 
     encoded = base64.b64encode(
-        subscription_text.encode("utf-8")
-    ).decode("ascii")
+        subscription_text.encode(
+            "utf-8"
+        )
+    ).decode(
+        "ascii"
+    )
 
-    SUBSCRIPTION_FILE.write_text(
+    # --------------------------------------------------------
+    # Write subscription safely
+    # --------------------------------------------------------
+
+    safe_write_text(
+        SUBSCRIPTION_FILE,
         encoded,
-        encoding="utf-8",
     )
 
     # --------------------------------------------------------
     # Human-readable output
     # --------------------------------------------------------
 
-    CONFIGS_FILE.write_text(
+    safe_write_text(
+        CONFIGS_FILE,
         subscription_text,
-        encoding="utf-8",
     )
 
 
