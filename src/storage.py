@@ -5,7 +5,7 @@ import time
 from .parser import canonical_config, normalize_config
 
 
-MAX_AGE_SECONDS = 2 * 60 * 60
+MAX_AGE_SECONDS = 5 * 60 * 60
 
 
 def config_id(config: str) -> str:
