@@ -1,12 +1,12 @@
 {
   "telegram": {
-    "2025442005": 165895,
+    "2025442005": 165898,
     "4388653422": 2,
-    "2211787746": 33359,
-    "3744627358": 51813,
-    "1836809801": 9223,
+    "2211787746": 33360,
+    "3744627358": 51828,
+    "1836809801": 9224,
     "1694914385": 20454,
-    "1512034774": 432178
+    "1512034774": 432179
   },
   "configs": {
     "96b0e3cae18734bcbc553a1e46e34047244fadec0f4394ace3f3dd56e8fb66a8": {
@@ -173,6 +173,36 @@
       "config": "vmess://eyJhZGQiOiIxNTYuMjQ1LjIzMi4yMzkiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiYjE1ZTQ4MWQtMTdlNC00MWE4LTg0YzItMjNkNGYwNTE0ZDlhIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIzNTA0MyIsInBzIjoiQGZpbGVtYmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9#Telegram%20%40iR_RUSE",
       "created_at": 1787064394,
       "source": "https://t.me/filembad"
+    },
+    "fe9728be4b7c369251b65645fdc29ec7da0939290c83ac2ad49cb95c2aa6f05b": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@18.193.240.71:22223?security=none&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787067651,
+      "source": "https://t.me/FreakConfig"
+    },
+    "f1ae1730988b3c466c5cbd17d0c1743ed6215b8b176f4ea4c40c2959e24c4690": {
+      "config": "vless://1e3332a1-82d4-3c60-166b-5c54db9ff355@69.46.46.30:443?path=/ws/1e3332a1-82d4-3c60-166b-5c54db9ff355&security=tls&alpn=http/1.1&encryption=none&insecure=0&host=rvg-production-01ad.up.railway.app&fp=ios&type=ws&allowInsecure=0&sni=rvg-production-01ad.up.railway.app#Telegram%20%40iR_RUSE",
+      "created_at": 1787067651,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "1c82ca4fff7e4141a8448e5fc51946f0ffd556332d1c849235e8f62d46b9a665": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpURkVsRzJGVnF5cUc@176.97.64.144:8388#Telegram%20%40iR_RUSE",
+      "created_at": 1787067651,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "a970c9fb588ea870c3c12826fb6755647791a5620c1b09b3e634127660f13c98": {
+      "config": "vless://93944f49-75cf-3a81-bf96-df734db609b6@69.46.46.20:443?path=/ws/93944f49-75cf-3a81-bf96-df734db609b6&security=tls&alpn=http/1.1&encryption=none&insecure=0&host=rvg-production-c94d.up.railway.app&fp=ios&type=ws&allowInsecure=0&sni=rvg-production-c94d.up.railway.app#Telegram%20%40iR_RUSE",
+      "created_at": 1787067651,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "2d4284b02c7e262ab9359b4b5bcab909ef7711de3fcd873f122da8a20b2af7c5": {
+      "config": "vless://808580aa-c9a2-4122-af67-89300df67fdf@188.213.197.141:34343?path=/&security=none&encryption=none&type=ws#Telegram%20%40iR_RUSE",
+      "created_at": 1787067651,
+      "source": "https://t.me/FreakConfig"
+    },
+    "1c40c699b590b97b97c8b16c59a893d54ad5f4c1710a76047cd8ed374bd2dc3d": {
+      "config": "vless://16569657-116c-46ed-8920-758ab8abaac4@djuc1.rapidmesh.ir:2096?security=reality&encryption=none&pbk=jqDgERbgQ5DVnJvw4p_j8XnM4GXUSXvPEn2t0TOtMms&headerType=none&fp=chrome&spx=/&type=tcp&flow=xtls-rprx-vision&sni=yahoo.com&sid=c2b19b0e0e625d01#Telegram%20%40iR_RUSE",
+      "created_at": 1787067651,
+      "source": "https://t.me/v2ray_dalghak"
     }
   }
 }
