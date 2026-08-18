@@ -1,64 +1,14 @@
 {
   "telegram": {
-    "2025442005": 165894,
+    "2025442005": 165895,
     "4388653422": 2,
-    "2211787746": 33358,
-    "3744627358": 51807,
+    "2211787746": 33359,
+    "3744627358": 51813,
     "1836809801": 9223,
     "1694914385": 20454,
     "1512034774": 432178
   },
   "configs": {
-    "1729a7b6c575cab71547be970b02b56858279265f6d4107f7c8a48d44e4f5098": {
-      "config": "vless://99d6bdee-1d04-455e-8ad9-43fc14b544b4@94.237.93.20:33651?security=&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/filembad"
-    },
-    "032ce2a1cd75851b5e8400f7b4b52f0223b911e24240b4ee27dee0c02855143b": {
-      "config": "vless://8ff538e4-330c-43c1-97c8-0c90bf989331@77.237.90.67:443?security=reality&encryption=none&pbk=a7eDhoO14l6Tt6oC9Qa2laZkuJlQ8vhDgtE3Ko9aGnw&headerType=none&fp=chrome&spx=%2Fa7a31c8e82daa25&type=tcp&sni=www.samsung.com&sid=20f787f764e45d#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/filembad"
-    },
-    "6c9dc4c11cd93c53799603d24ef12edd700fe1c067cd5b8e370e3ac6d0957d14": {
-      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.187.235.95:22223?encryption=none&security=none&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "917f8db10756dace85ec8d667837b377f9fe607619c0d0376803673c2a9fd24f": {
-      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.187.235.95:22224?encryption=none&security=none&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "e45f9cb3adae07199f546b371566f4b4d055128e3878bbadbe9156ac5d18bf8f": {
-      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.187.235.95:22222?encryption=none&security=none&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "dab84561c6bc984f9345b4d7c42ac0f86e965c622f0a46330839589acbaa6ab5": {
-      "config": "vmess://eyJhZGQiOiAiODIuMTk4LjI0Ni4yMzMiLCAiYWlkIjogIjAiLCAiYWxwbiI6ICIiLCAiZnAiOiAiIiwgImhvc3QiOiAidjJyYXlOcGx1cy0tdjJyYXlOcGx1cy0tdjJyYXlOcGx1cyIsICJpZCI6ICJkMTNmYzJmNS0zZTA1LTQ3OTUtODFlYi00NDE0M2EwOWU1NTIiLCAibmV0IjogInRjcCIsICJwYXRoIjogIiIsICJwb3J0IjogIjE4MCIsICJwcyI6ICJcdWQ4M2NcdWRmOGEgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogIiIsICJ0bHMiOiAiIiwgInR5cGUiOiAibm9uZSIsICJ2IjogIjIifQ==#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "bdcefbbc6cceb9094a36f1f6aa53de131a5cd940199ec038c6308b09e9ac543b": {
-      "config": "vmess://eyJhZGQiOiAiMTY1LjE0MC4yMTYuMTQyIiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjogIiIsICJob3N0IjogIiIsICJpZCI6ICJiNjVhMmQ2OS01NjM0LTQyYTItZTRiZS01NGU4YTYxNzY5MDAiLCAibmV0IjogInRjcCIsICJwYXRoIjogIi9MZXZpa29Db25maWciLCAicG9ydCI6ICI0NDMiLCAicHMiOiAiXHUyNzA4XHVmZTBmIEB2MnJheV9EYWxnaGFrIiwgInNjeSI6ICJhdXRvIiwgInNuaSI6ICIiLCAidGxzIjogIiIsICJ0eXBlIjogIm5vbmUiLCAidiI6ICIyIn0=#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "fdbec57ce2b9b5692e4df40bb197a33c3d373a3ff094f04451e53ad9bd05d6e4": {
-      "config": "vmess://eyJhZGQiOiAiODIuMTk4LjI0Ni4zNyIsICJhaWQiOiAiMCIsICJhbHBuIjogIiIsICJmcCI6ICIiLCAiaG9zdCI6ICJmcmE1LmNoYXNlbTIwMjZzdWQuY29tIiwgImlkIjogImQxM2ZjMmY1LTNlMDUtNDc5NS04MWViLTQ0MTQzYTA5ZTU1MiIsICJuZXQiOiAidGNwIiwgInBhdGgiOiAiLyIsICJwb3J0IjogIjE4MCIsICJwcyI6ICJcdWQ4M2RcdWRjYWIgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogImZyYTUuY2hhc2VtMjAyNnN1ZC5jb20iLCAidGxzIjogIiIsICJ0eXBlIjogIm5vbmUiLCAidiI6ICIyIn0=#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "a11447b4bc0e9e39fae2f3f6ff23753a86e306521519f391b984fbf7b780a5cb": {
-      "config": "vmess://eyJhZGQiOiAiNjYuMTYzLjExNy41OCIsICJhaWQiOiAiMCIsICJhbHBuIjogIiIsICJmcCI6ICIiLCAiaG9zdCI6ICIiLCAiaWQiOiAiMDQ2MjFiYWUtYWIzNi0xMWVjLWI5MDktMDI0MmFjMTIwMDAyIiwgIm5ldCI6ICJ0Y3AiLCAicGF0aCI6ICIiLCAicG9ydCI6ICIyMjMyNCIsICJwcyI6ICJcdWQ4M2VcdWRkMzlcdTIwMGRcdTI2NDBcdWZlMGYgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogIiIsICJ0bHMiOiAiIiwgInR5cGUiOiAibm9uZSIsICJ2IjogIjIifQ==#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
-    "5610bdc5dac9323b720c5f79b46916e59c7642235d5686713224634810ba9e0f": {
-      "config": "vmess://eyJhZGQiOiAiMTY1LjE0MC4yMTYuMTQxIiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjogIiIsICJob3N0IjogIiIsICJpZCI6ICJlN2Q3MmE4ZC0yNmYyLTRiNTQtYjM2Ni0wYzQzZTBiY2JhN2QiLCAibmV0IjogInRjcCIsICJwYXRoIjogIiIsICJwb3J0IjogIjQ0MyIsICJwcyI6ICJcdWQ4M2NcdWRjY2YgQHYycmF5X0RhbGdoYWsiLCAic2N5IjogImF1dG8iLCAic25pIjogIiIsICJ0bHMiOiAiIiwgInR5cGUiOiAibm9uZSIsICJ2IjogIjIifQ==#Telegram%20%40iR_RUSE",
-      "created_at": 1787046355,
-      "source": "https://t.me/v2ray_dalghak"
-    },
     "96b0e3cae18734bcbc553a1e46e34047244fadec0f4394ace3f3dd56e8fb66a8": {
       "config": "vless://f1dd9ca3-8900-d355-8056-690e2d903d08@tgf35bot-production.up.railway.app:443?encryption=none&security=tls&type=ws&host=tgf35bot-production.up.railway.app&path=/ws/f1dd9ca3-8900-d355-8056-690e2d903d08&sni=tgf35bot-production.up.railway.app&fp=ios&alpn=http/1.1#Telegram%20%40iR_RUSE",
       "created_at": 1787049793,
@@ -218,6 +168,11 @@
       "config": "vless://14f493a7-242a-4add-8413-cecc063b3ce3@130.185.123.32:443?security=tls&alpn=h2,http/1.1&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0#Telegram%20%40iR_RUSE",
       "created_at": 1787061181,
       "source": "https://t.me/v2ray_dalghak"
+    },
+    "938ed825622667025b688989de429f2619428cdadb8bc01dd10e7418a579eb24": {
+      "config": "vmess://eyJhZGQiOiIxNTYuMjQ1LjIzMi4yMzkiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiYjE1ZTQ4MWQtMTdlNC00MWE4LTg0YzItMjNkNGYwNTE0ZDlhIiwiaW5zZWN1cmUiOiIwIiwibmV0Ijoid3MiLCJwYXRoIjoiLyIsInBvcnQiOiIzNTA0MyIsInBzIjoiQGZpbGVtYmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiItLS0iLCJ2IjoiMiJ9#Telegram%20%40iR_RUSE",
+      "created_at": 1787064394,
+      "source": "https://t.me/filembad"
     }
   }
 }
