@@ -1,49 +1,29 @@
 {
   "telegram": {
-    "2025442005": 165856,
+    "2025442005": 165859,
     "4388653422": 2,
     "2211787746": 33355
   },
   "configs": {
-    "4ffbe83f5e2afdb458cc19d065b1420afe36a0ed991ec10ef907d2f28da65620": {
-      "config": "vless://003c712d-daa1-4c3f-bed2-658e7787d04c@31.77.57.112:6243?security=reality&encryption=none&pbk=B55CpLIn63ajsDxoRe9icE2qa-rXcEiQXLpqfhHp2B0&headerType=none&fp=firefox&type=tcp&sni=github.com&sid=0dabc5964c#Telegram%20%40iR_RUSE",
-      "created_at": 1787006243,
+    "9b37a9f29ef40a16ec3d56bfcedcc04577a11c9ec3916fe004368dabe92b4433": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpCcW5xVG9paDBQYlU@51.255.13.232:8388#Telegram%20%40iR_RUSE",
+      "created_at": 1787017656,
       "source": "https://t.me/filembad"
     },
-    "392e127687abf8f987f664d658a073c99503e9f7d61959c7f7378e6fa6abd901": {
-      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@3.79.218.80:22223?security=&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787006243,
+    "41786d1304e6b0199eba36f7f5d11ff25626edd90c464153803ace2712f48451": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpGRDNyQ3VPc3hPYXk@15.235.75.71:8388#Telegram%20%40iR_RUSE",
+      "created_at": 1787017656,
       "source": "https://t.me/filembad"
     },
-    "2f1118294a493743e3435332fc17d2824a772926cc252a0b467bf80bf9a9dbac": {
-      "config": "vless://003c712d-daa1-4c3f-bed2-658e7787d04c@31.77.57.112:6243?security=reality&encryption=none&pbk=B55CpLIn63ajsDxoRe9icE2qa-rXcEiQXLpqfhHp2B0&headerType=none&fp=firefox&type=tcp&sni=github.com&sid=0dabc5964c#Telegram%20%40iR_RUSE",
-      "created_at": 1787006243,
+    "5a06387fb6613369a472145f1648c1f17312e0c764ca0008df6641dbfbdc61a5": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpCcW5xVG9paDBQYlU@51.255.13.232:8388#Telegram%20%40iR_RUSE",
+      "created_at": 1787017656,
       "source": "https://t.me/filembad"
     },
-    "ae8110f9924b0711345419cec72731f6a2423e9cafdb0f477009bab70dd7496d": {
-      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@3.79.218.80:22223?security=&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787006243,
+    "6bbeec8a7e71e55528f1b4072610b044405a50442274288a1042ff1cb1562553": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpGRDNyQ3VPc3hPYXk@15.235.75.71:8388#Telegram%20%40iR_RUSE",
+      "created_at": 1787017656,
       "source": "https://t.me/filembad"
-    },
-    "8d59c362afe7d657643cae32221efe89a0e3343efba91bfb5a05778634c8d78a": {
-      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=%2FzyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#Telegram%20%40iR_RUSE",
-      "created_at": 1787009639,
-      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
-    },
-    "502f50ec265378c8ee0782b089e67244708609fd83b2e943e34f90b788fcbf6b": {
-      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=%2FzyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#Telegram%20%40iR_RUSE",
-      "created_at": 1787009639,
-      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
-    },
-    "d084f72b1f2aa1681b137ac407916d365b81ecf00704f4adf4818b960be1af65": {
-      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=/zyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#Telegram%20%40iR_RUSE",
-      "created_at": 1787009639,
-      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
-    },
-    "9254d8b42b47da69380016148df1d546781c7d202a4ad2a04c91dcccaf55eba1": {
-      "config": "trojan://Masir_Sefid@Masir_Sefid:443?security=reality&pbk=w0XepGv1Hk0gBh1Apiw-nvn8SfzjWcDuxdxN1mpaF3g&headerType=none&fp=chrome&spx=/zyKRb3NaP9Ee0j4&type=tcp&sni=store.steampowered.com&sid=6ced01fc4aa417#Telegram%20%40iR_RUSE",
-      "created_at": 1787009639,
-      "source": "https://raw.githubusercontent.com/masir-sefid/Sub/main/Telegram-Channel-@Masir_Sefid.txt"
     }
   }
 }
