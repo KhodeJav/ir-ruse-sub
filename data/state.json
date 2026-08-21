@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "2025442005": 166202,
+    "2025442005": 166203,
     "4388653422": 2,
     "2211787746": 33383,
-    "3744627358": 53605,
+    "3744627358": 53623,
     "1836809801": 9284,
     "1694914385": 20525,
     "1512034774": 432382
@@ -548,6 +548,31 @@
       "config": "vless://435bda4c-fe5e-42c9-a3ad-15334943b38a@104.18.35.208:80?security=none&type=ws&host=us3.rtacg.com&path=/#Telegram%20%40iR_RUSE",
       "created_at": 1787353060,
       "source": "https://t.me/v2ray_dalghak"
+    },
+    "7b1f3282fcb953de212f59f8b9737a8c076617062d81d6fa24d436445b4418e1": {
+      "config": "vless://83c18ff2-0565-4b53-89ad-57357fef153b@172.96.121.6:443?security=reality&encryption=none&pbk=bHGC7iI4Q50nxoYStP3TjBaRXih6O0bmuemexki0aXY&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=www.bing.com&sid=29ff8963a9fe281c#Telegram%20%40iR_RUSE",
+      "created_at": 1787355245,
+      "source": "https://t.me/filembad"
+    },
+    "4feb184c09601abdc08167794baff9b67b50efb191499179969dedececd5225e": {
+      "config": "vless://caec0d8d-ab2f-4247-b97d-7fb1a34ab195@180.178.60.254:10000?security=none&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_RUSE",
+      "created_at": 1787355245,
+      "source": "https://t.me/filembad"
+    },
+    "ac88a7ac952fd222ff4e23d597df6f229f1b1c5d8eb2d09f1632284059413ee5": {
+      "config": "vless://690ad3be-991b-4a2c-b351-42dd06789d03@162.128.71.118:443?security=reality&encryption=none&pbk=3ZKNZEktRaPxt-XoWmx68EGsFwglnICVkvIl96973iA&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=www.bing.com&sid=4014ce9b0d82ad9d#Telegram%20%40iR_RUSE",
+      "created_at": 1787355245,
+      "source": "https://t.me/filembad"
+    },
+    "2acb55ebe69d03fc39c9b1f64ce3c6edf7d33a38c5de094ffe3e17ff7228b5c7": {
+      "config": "vless://83afd88f-200f-4d89-bfc7-66eff160c1d8@104.16.117.43:443?path=%2F%3FTELEGRAM-MARAMBASHI_MARAMBASHI%3Fed%3D512&security=tls&encryption=none&insecure=0&host=josni.hoyes.cloudns.ch&ech=ip.gs%2Budp%3A%2F%2F8.8.8.8&type=ws&allowInsecure=0&sni=josni.hoyes.cloudns.ch#Telegram%20%40iR_RUSE",
+      "created_at": 1787355245,
+      "source": "https://t.me/persianvpnhub"
+    },
+    "7ddc62e8d97a0e563c9c32929b762b5095b26fb15d317a6d97640a17da48036b": {
+      "config": "vless://83afd88f-200f-4d89-bfc7-66eff160c1d8@104.16.117.43:443?path=/?TELEGRAM-MARAMBASHI_MARAMBASHI?ed=512&security=tls&encryption=none&insecure=0&host=josni.hoyes.cloudns.ch&ech=ip.gs+udp://8.8.8.8&type=ws&allowInsecure=0&sni=josni.hoyes.cloudns.ch#Telegram%20%40iR_RUSE",
+      "created_at": 1787355245,
+      "source": "https://t.me/persianvpnhub"
     }
   }
 }
