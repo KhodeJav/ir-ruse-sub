@@ -1,12 +1,12 @@
 {
   "telegram": {
-    "2025442005": 166281,
+    "2025442005": 166283,
     "4388653422": 2,
     "2211787746": 33388,
     "3744627358": 54105,
     "1836809801": 9293,
     "1694914385": 20533,
-    "1512034774": 432403
+    "1512034774": 432404
   },
   "configs": {
     "f47564529b0156e3e958641a310c58e4e6315ba5bfc1556232e1f96c71691d94": {
@@ -458,6 +458,51 @@
       "config": "vless://b2e8f455-3bd9-477c-b8f0-a3198f601565@54.38.138.175:443?encryption=none&fp=&headerType=http&path=%2Fnaranv2ray&pbk=LrDYMSt1pt2h6n-7YnHpcUAb_IG7QsQ0rfXz8RqkfCY&security=reality&sid=9e0fac51cc19d2&sni=play.google.com&type=tcp#Telegram%20%40iR_RUSE",
       "created_at": 1787417852,
       "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "2c2972888aa7e0ae3a35e7f1c700df290a2cc6c5cc4f9c18c3408d4048f00ce9": {
+      "config": "vless://5ac0cd77-12e9-433b-a7ca-84548adb120d@fsercicesl.iramssnew2.ir:443?security=reality&encryption=none&pbk=e5EEKLpt_oiRToXwe9yrM_frlLNmitHNIUeFEKmFJ2U&headerType=none&fp=edge&type=tcp&sni=amp-api-edge.apps.apple.com&sid=41f6eb7376ae1d49#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/filembad"
+    },
+    "deaa91b5b7d54aad831fca21822c9ab31d238937ea0111d2f1f42f0758bd6a6a": {
+      "config": "vless://8c105407-82fb-4dd1-8df4-916d34a7d3fe@194.48.250.31:443?mode=auto&path=/&security=reality&encryption=none&pbk=sJTPQLMDCyPAbRcaJM-P8Y3_xRVpEEGrvv-kkIuIuQE&host=www.google.com&fp=qq&type=xhttp&sni=www.google.com#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/filembad"
+    },
+    "f3dc100ad9ba3dc8141548ad2ff9b05bddd8d6e96e49250975bf41bf033ce220": {
+      "config": "vless://83afd88f-200f-4d89-bfc7-66eff160c1d8@188.114.97.6:8080?path=musiclovers85_musiclovers85%3Fed%3D512&security=&encryption=none&fm=%7B%22tcp%22%3A%20%5B%7B%22type%22%3A%20%22fragment%22%2C%20%22settings%22%3A%20%7B%22packets%22%3A%20%221-1%22%2C%20%22lengths%22%3A%20%5B%221%22%5D%2C%20%22delays%22%3A%20%5B%224%22%5D%2C%20%22maxSplit%22%3A%20%22522%22%7D%7D%5D%7D&host=josni.hoyes.cloudns.ch&ech=ip.gs%2Budp%3A%2F%2F8.8.8.8&type=ws#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/filembad"
+    },
+    "64043f1bd0b4888a824a3ce3eb3aab6787658314ec85ce225ecc44dedd7537a2": {
+      "config": "ss://YWVzLTI1Ni1nY206c0ZTMzQxZWNlYUlpU20yZA@154.53.63.33:80#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/filembad"
+    },
+    "e9137e666bd406d7ca4a7df4a510693d1698eb0eb38125a11246fda6cd2874cd": {
+      "config": "vless://83afd88f-200f-4d89-bfc7-66eff160c1d8@188.114.97.6:8080?path=musiclovers85_musiclovers85?ed=512&security=&encryption=none&fm=#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/filembad"
+    },
+    "28955425063219d43fce30253a74f7f118da0437f57cf9c6efb616ebbe5ec1ff": {
+      "config": "vless://b893903a-8713-016c-266a-51b5113bac2c@69.46.46.19:443?path=/ws/b893903a-8713-016c-266a-51b5113bac2c&security=tls&alpn=http/1.1&encryption=none&insecure=0&host=llo-production-f821.up.railway.app&fp=ios&type=ws&allowInsecure=0&sni=llo-production-f821.up.railway.app#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "55075f96994b1f1adfbed9dde6551013b92355cf465822b4b545b91e8d486e31": {
+      "config": "vless://435bda4c-fe5e-42c9-a3ad-15334943b38a@104.17.58.77:80?security=none&type=ws&host=us3.rtacg.com&path=/#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "1753e7decb82de98a4fb13bb5e8b8701a7d6fbde2c9d4017454721fde474ddc3": {
+      "config": "vless://c370fd41-c7ac-427e-84a1-2af26bd1f93a@188.114.98.9:8080?security=none&type=ws&host=www.speedtest.net.kkkkklllkokowkfwofkfkfekojg.ir.mralpha-vpn.COm.&path=/Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit,Telegram-MainSecurit?ed=2040#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/v2ray_dalghak"
+    },
+    "ac8e2e6ea552a6ac2e476c7fad0fcab9b7007eed22ebf1cd0334eb34bdbe050b": {
+      "config": "vless://edf22b0c-b871-4ffc-9f8c-88a3e4f66338@www.speedtest.net:8080?path=SHHPROXY?ed=8080&security=none&encryption=none&host=SHHproxy--shhPROXY--SHHproxy.joinTELEGRAM.net.&type=ws#Telegram%20%40iR_RUSE",
+      "created_at": 1787421199,
+      "source": "https://t.me/v2ray_dalghak"
     }
   }
 }
