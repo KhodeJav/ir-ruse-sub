@@ -280,14 +280,14 @@ def normalize_config(config: str) -> str:
     hash_index = config.find("#")
 
     if hash_index == -1:
-        return config + "#Telegram%20%40iR_RUSE"
+        return config + "#Telegram%20%40iR_Xray"
 
     # بسیار مهم:
     # کل URI قبل از # بدون هیچ تغییری حفظ می‌شود.
     base = config[:hash_index]
 
     # فقط Remark تغییر می‌کند.
-    return base + "#Telegram%20%40iR_RUSE"
+    return base + "#Telegram%20%40iR_Xray"
 
     value = str(config).strip()
 
