@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "2025442005": 166393,
+    "2025442005": 166400,
     "4388653422": 2,
-    "2211787746": 33402,
-    "3744627358": 54510,
+    "2211787746": 33403,
+    "3744627358": 54540,
     "1836809801": 9306,
     "1694914385": 20540,
     "1512034774": 432419
@@ -458,6 +458,26 @@
       "config": "vmess://eyJhZGQiOiAiZGFzaGJvYXJkLmFmcmFtYXJrZXQudG9wIiwgImFpZCI6ICIwIiwgImFscG4iOiAiIiwgImZwIjogIiIsICJob3N0IjogIiIsICJpZCI6ICIxMzBiMGZiZi00ZjE5LTQ0ZDAtOTExZi05NTM1NWU5NjMyZTQiLCAiaW5zZWN1cmUiOiAiMCIsICJuZXQiOiAidGNwIiwgInBhdGgiOiAiIiwgInBjcyI6ICIiLCAicG9ydCI6ICI1Mzg0IiwgInBzIjogIlx1ZDgzY1x1ZGZhYSBAdjJyYXlfRGFsZ2hhayIsICJzY3kiOiAiYXV0byIsICJzbmkiOiAiIiwgInRscyI6ICIiLCAidHlwZSI6ICJub25lIiwgInYiOiAiMiIsICJ2Y24iOiAiIn0=#Telegram%20%40iR_Xray",
       "created_at": 1787492448,
       "source": "https://t.me/v2ray_dalghak"
+    },
+    "a096698486dc1ca57bf1e2213503b4aa3c4e0f6d576f886c60855246ff3e3a2a": {
+      "config": "vless://8d44a812-229a-4c54-a461-8109b29621a7@111.88.223.82:443?mode=gun&security=reality&encryption=none&pbk=6CHUluOn_Tdab7JOfUArmcfQPVEd4PbEQJMPvKWElhw&fp=qq&type=grpc&serviceName=grpc-tunnel&sni=dl.google.com#Telegram%20%40iR_Xray",
+      "created_at": 1787495663,
+      "source": "https://t.me/filembad"
+    },
+    "d3869163fb6d1beeccf678b58b49ccbc027137cfeee14539403bc12ddc2a248f": {
+      "config": "vless://904cd6f2-9740-44e5-9353-58207c8e64c7@185.143.232.253:8080?path=/&type=ws&security=none&encryption=none&host=2ja0n7x60a.star2.panelpars.ir#Telegram%20%40iR_Xray",
+      "created_at": 1787495663,
+      "source": "https://t.me/filembad"
+    },
+    "5d37406fc9ceb146b6e45d9bcf745056f58ddb07f68fa46009f079cf170ede3c": {
+      "config": "vless://473d69bc-4034-4b88-8258-15370cf26d60@202.133.88.51:2083?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=0VAi_Jpn4icncP7Aa2zuMQm4kLMpt0mHlMT81Gswqgw&security=reality&sid=ff8fcc19&sni=amp-api-edge.apps.apple.com&spx=/xNa4IfBF0WzdIs0&type=tcp#Telegram%20%40iR_Xray",
+      "created_at": 1787495663,
+      "source": "https://t.me/filembad"
+    },
+    "9d59f686989edfec34c75d51bf46b7330cd0ad59d7bdedd2ac166d6d4bff96eb": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3ZTczMWVjMy1mOGUxLTQzZjYtOTJjZi0zOTc4ZDE0NzA1YzQ@114.25.9.70:50099#Telegram%20%40iR_Xray",
+      "created_at": 1787495663,
+      "source": "https://t.me/persianvpnhub"
     }
   }
 }
