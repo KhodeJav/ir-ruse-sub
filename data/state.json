@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "2025442005": 166458,
+    "2025442005": 166459,
     "4388653422": 2,
     "2211787746": 33406,
-    "3744627358": 54808,
+    "3744627358": 54814,
     "1836809801": 9312,
     "1694914385": 20551,
     "1512034774": 432427
@@ -378,6 +378,16 @@
       "config": "vless://b2e8f455-3bd9-477c-b8f0-a3198f601565@54.38.138.175:443?encryption=none&fp=&headerType=http&path=%2Fnaranv2ray&pbk=LrDYMSt1pt2h6n-7YnHpcUAb_IG7QsQ0rfXz8RqkfCY&security=reality&sid=9e0fac51cc19d2&sni=play.google.com&type=tcp#Telegram%20%40iR_Xray",
       "created_at": 1787525668,
       "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "41b340c6257dd1412156a03ecd8c542c08553f3093872f80e9c5ffdfdef16cd9": {
+      "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpGRDNyQ3VPc3hPYXk@15.235.75.71:8388#Telegram%20%40iR_Xray",
+      "created_at": 1787527865,
+      "source": "https://t.me/filembad"
+    },
+    "20b7234e1ac67b249c513cab7edc4a59340c64b730fe0127a22ce6354eccab1d": {
+      "config": "vless://7ee1bcc1-2bf0-e17a-5248-d0d6e73b1217@irhub-production-2104.up.railway.app:443?encryption=none&security=tls&type=ws&host=irhub-production-2104.up.railway.app&path=/ws/7ee1bcc1-2bf0-e17a-5248-d0d6e73b1217&sni=irhub-production-2104.up.railway.app&fp=chrome&alpn=http/1.1#Telegram%20%40iR_Xray",
+      "created_at": 1787527865,
+      "source": "https://t.me/persianvpnhub"
     }
   }
 }
