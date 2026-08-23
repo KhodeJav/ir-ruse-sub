@@ -1,44 +1,14 @@
 {
   "telegram": {
-    "2025442005": 166327,
+    "2025442005": 166328,
     "4388653422": 2,
     "2211787746": 33389,
-    "3744627358": 54286,
+    "3744627358": 54303,
     "1836809801": 9297,
     "1694914385": 20536,
     "1512034774": 432410
   },
   "configs": {
-    "515ba3a6c064927e13e2ec45c350d7e1b9518332cbedeac973e33ed82b870354": {
-      "config": "vmess://eyJhZGQiOiJkYXNoYm9hcmQuYWZyYW1hbGwudG9wIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6Ijc2Y2VmY2Q3LTZiNTMtNGM2NS1hZDI5LTFhOTI3MzRmYzk2OCIsImluc2VjdXJlIjoiMCIsIm5ldCI6InRjcCIsInBhdGgiOiIiLCJwY3MiOiIiLCJwb3J0IjoiNTM4NiIsInBzIjoiQGZpbGVtYmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIiLCJ2Y24iOiIifQ==#Telegram%20%40iR_RUSE",
-      "created_at": 1787438000,
-      "source": "https://t.me/filembad"
-    },
-    "03a7b8bd6b3d6e2701e904265bf09e7385c98c229910b8dce54bb65d491d5a67": {
-      "config": "vmess://eyJhZGQiOiJkYXNoYm9hcmQuYWZyYXBheS50b3AiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiNzZjZWZjZDctNmI1My00YzY1LWFkMjktMWE5MjczNGZjOTY4IiwiaW5zZWN1cmUiOiIwIiwibmV0IjoidGNwIiwicGF0aCI6IiIsInBjcyI6IiIsInBvcnQiOiI1Mzg1IiwicHMiOiJAZmlsZW1iYWQiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiIsInZjbiI6IiJ9#Telegram%20%40iR_RUSE",
-      "created_at": 1787438000,
-      "source": "https://t.me/filembad"
-    },
-    "687bc083bff158f13da2cb310b6e453a532f1d6e02911872cbc41b958be4a4fe": {
-      "config": "vmess://eyJhZGQiOiJkYXNoYm9hcmQuYWZyYWNhZmUudG9wIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6Ijc2Y2VmY2Q3LTZiNTMtNGM2NS1hZDI5LTFhOTI3MzRmYzk2OCIsImluc2VjdXJlIjoiMCIsIm5ldCI6InRjcCIsInBhdGgiOiIiLCJwY3MiOiIiLCJwb3J0IjoiNTM4OCIsInBzIjoiQGZpbGVtYmFkIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIiLCJ2Y24iOiIifQ==#Telegram%20%40iR_RUSE",
-      "created_at": 1787438000,
-      "source": "https://t.me/filembad"
-    },
-    "d3499d018148c2c08761e9b181d617794da8afc788bb00640ddf9ebb5be5948b": {
-      "config": "vless://5adeccb9-dfca-41de-cdf7-4d901f2e70f5@157.238.208.110:41834?path=/5adeccb9&security=none&encryption=none&type=ws#Telegram%20%40iR_RUSE",
-      "created_at": 1787438000,
-      "source": "https://t.me/persianvpnhub"
-    },
-    "43fe4166e29c90619ff3b595760e2e58697796aad08eed4f57a50171b7651685": {
-      "config": "vless://a6cf4b28-ba72-4e8c-90f8-6a884107ab3c@144.31.207.4:4443?mode=auto&path=/&security=reality&encryption=none&pbk=Hcg9T_s9LuWkVQW14TzIPuyZio32WbA6irp782TUXnM&fp=firefox&type=xhttp&sni=plot.whit3.net&sid=0138875bd7d8725a#Telegram%20%40iR_RUSE",
-      "created_at": 1787439268,
-      "source": "https://t.me/filembad"
-    },
-    "b05c61941826efe20c780930127ed8ad4a8a23f0aef7290fea13e0deef4040ec": {
-      "config": "vless://b2e8f455-3bd9-477c-b8f0-a3198f601565@54.38.138.175:443?encryption=none&fp=&headerType=http&path=%2Fnaranv2ray&pbk=LrDYMSt1pt2h6n-7YnHpcUAb_IG7QsQ0rfXz8RqkfCY&security=reality&sid=9e0fac51cc19d2&sni=play.google.com&type=tcp#Telegram%20%40iR_RUSE",
-      "created_at": 1787439268,
-      "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
-    },
     "7339b20206bd9e9ea9ead7804c9b2b432506ee05978e7f00edfe4eb908508e1a": {
       "config": "vless://74ea2097-58b4-451d-a5ad-33e5f69d6fd0@store1.vevluma.ir:1234?type=tcp&security=reality&sni=updates.cdn-apple.com&encryption=none&flow=xtls-rprx-vision&headerType=none&fp=chrome&pqv=beyUz6alrDOJfnRLjolbDTu7-DTvvnA3rU3XlC0oBgDFEghJMQIZUWeSu4I0l8eA1PJNvzBEeM-DE69i10_jEvFTbzfrRwrZ9S9cPVUSHFVX1G_39ReLhbBUj_yZ8VfqSQtmyJmMJIHcRBJ7SlpshZ0D2JeZ8HXxJOZqWePOofjW1OI7PR9F-4DBAFbs0G0Lt71mLdXSPRpe5Gi_L95Ry84NgQ6qSxuv_XFOq-arGv_VG6KGXEldrQw6yHHyB8nKweatPefjmYqSeEqqc--ZD5e3KI0OwqpIJLORyDUzVc2ali9JqHhJ1fW5Yiu97ivHEXQRGlv45Zk1cIFg_WMuIqbGD9KG1VfvaD5XL-4aTZ8tpkhT0mxCCkr9PXujiQ7YJbJEanY-QEzO8WXORNlhk2R0wTwQ38hgapWaX4UT05GibjSYpArXfGn_0qQdPU3mg94gwFqv8Z0g-3L7-wvu23UaGESvyOM2kdi3UGGjhbISg_FagRYptvHTMpwx560N1tmez6fsOvdDDvbsX5wbNb5xGZIny0D77jVTqJkEHmwgCCKtucG4o151Woor6TAGAA4mJyQWNukDq8btpu9VTY3MY4HJaIabZB16h6PI5KmbsWtSJlK_eYMXr4T6zXzNc_6fYskfJ8cdEb6hci09hZWJE8tKF1Q2HANP3i6LltxkaCtgtCKyp4taYN3AN1X1EtAQNTBHYpfDZYevbcuSiRgd9hdQFt_hGxVgJpEmtVrNaQylU9vK-7tIqnuBXhHia7YoH_BSPFW2nGhMz32Yp-X98a8gW3SpvodhGkWWZSKBZhXLkRnpgbRsLm7HxzIpe2qjTxPsWs3nQllDZOm1Y657NxvseeP7aKvmnGfiNiw5YRMFe16jtVfzSzYFbrydwhxw6GUQMCmirHKzRuQP1Llflw2M_JeU-PubBGkr4ztvQDfpr6qJf_MfUu6NHc24O8fzZ-RANhNoM_2KCAMlarJ0hq_wHteyOEoOTxPxyCRUk1RT48TKWsEEBnMmKCI4CzQWi2FYDyKblYJz3TvLx3KzR8uWFmLcuSbknSrdjr83UuvLg5q9Hn6twnEqexfvHEYuKMy9QzZ4g3JOdEYlbfiFq-j2mtOAPk5FXiRQguBHHf8qejzAjb_I5oUO8rX3oMJvAMq3SHumr67YK3-ADzYXhWQ3-DDCqLfFRqpCfH5rwJVNUQdyO8ST8HapKsoHA-ygUJ_XMX1a226xu_85S4GkJ-keazJ_uDbr_bc-j82Gft0hgz9eBnOFjQnrH43Ptg6aferDSIrg6yanSrsDB1DlCODu2f5-SAncqQs8Wr1KfUhjsJKHuFUPKDESU_JvVSwubVNP6dlmq91a9n33NHlEtVoUSrSIk6EwKEfiM-ZkUfSDRi9Q7JCmBf8hOzasC_gjTAgdFj_D9GFab8DY-6KAiAGD2K2rOvy9Io5ib6PEyhgPFz043WSl32ga2-WgGwayA0rdOfRXs7EFIxoW-YiyaQKhWmS1fctebY6MAlCtFr7iyjMwF6aVG5eZclVK4Bn_cbQ13bS1cnQEW2AI4kvdswgLcpm1K1TDHSL50ElQEvFG64VSRJwN5zogBxpDeuYjOR4N5Gtj2gWOtJ6g7NN5qiFxTQa5nmGt8Uy822Hm4gfHhxSUb5_xhG_qHTj58NQrykaOAMw1YnbbJP4ML6DPkqgF77nVK1m4d9UwvVUTu0B9R-GNGr4h5fimXn1MrK2BURX-AZZR5oBQzFSfhPhJwDDpYkTcJ3ztRpsn2lRQpltcL-5iC-yO0AiKG05WOoGGNiSBu6I4GVOiWupIN_pHJZd30njH3I5N9YjsH0DNsTRwuFC-6zupGt8mb2wOeqTwHiNslUDz9OeiZVFtkjiVE1Y0E7eU5uQRXHrwzm7EVGzNL1jqXjXaCD5PLpXH8CrB0v7-fF2_4s2DmpjUX_X1f-dO67Z_XobqbUmEomRNezb1gbAanW-nKMtfPZnz1K0L99SJyx0Zd7rYtkL2qQLmVcEOkHEERQvmzZvmmg09Yh5ruJ_LdA6ET-c3t8j8JVt127bdkAvXNZSXppJzhqldZjln_z6PwObHHXpr-IbO16tYf9Gid_TPsuueQp4iLITCCZ34A1yg0ax4Cqj9lxkEILp85RZAd41d95upuh6Bv17Hq0Q0diMos3G2pWwzqgzaOf3VswzfDAfpeLEIR3FnmXntFmBqNY257AmWeiWEDnFYwFrYV0JmdNW7s-DBzdBcCr6Z9XUbqcgR-sv3iHHZuK532OiHdasu2wdF72DF5bjzcwDhf1k-5Zffno57WKONAGvVRwFJ0ejAob4iVGgw3XsFR7Luf5Fg9yFoLOXXrv5dh7XIiZsLQoG8VLDlptlkoGrwR2NI9OFQrQGUgsNHTF3wl2vAGUBokT8ntkP2Qv-FJZxbqwkcoUGuskDBcgKBA-wAHIEpu_QHSHaWjNk6Mt4dAnF9CoGHNZ8led688lIsiSYkSr4ja5K2SOKog8WDprPccxVniU3MgBVY6eGa_IFOum4EOrkc7YXmZc6oDCBzIogKdxE3wFXeoD99zoBWWzvayw6lMdATLCivgR1OeNVL3dC2DZY-dMVUfc0&pbk=4sT8gYkbYI1RUPlO-SFVpJENKfGgMWoYQpflbcfspkI&sid=4844fb0c077b20b7#Telegram%20%40iR_RUSE",
       "created_at": 1787441446,
@@ -172,6 +142,41 @@
     "0b81fb7e3b1665bb9759c9d8cc5c70f7e8ae2590de868806f94bb11e7c626d76": {
       "config": "vmess://eyJ2IjogIjIiLCAicHMiOiAiQEhvcGVfTmV0LWpvaW4tdXMtb24tVGVsZWdyYW0iLCAiYWRkIjogIjgyLjE5OC4yNDYuMjUwIiwgInBvcnQiOiAiMTgwIiwgInR5cGUiOiAibm9uZSIsICJpZCI6ICJkMTNmYzJmNS0zZTA1LTQ3OTUtODFlYi00NDE0M2EwOWU1NTIiLCAiYWlkIjogIjAiLCAibmV0IjogInRjcCIsICJwYXRoIjogIi83OTk2MGIwYi03ZDMxLTQyNjMtODkxNS02NTExYjBlMTM3YTgvP2VkXFw9MjU2MCIsICJob3N0IjogIjBiMGM2ZGI2LXQ3MGY0MC10YmU0NnktMWxhN3YuaGt0LmdvdG9jaGluYXRvd24ubmV0IiwgInRscyI6ICIifQ==#Telegram%20%40iR_RUSE",
       "created_at": 1787454729,
+      "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "e9128a084d3b76d76be1ab1736f6c94298db729f6077d00813b639d770c13010": {
+      "config": "vless://663836b2-f676-43fb-977f-47c495b1b383@212.67.17.204:443?security=reality&encryption=none&pbk=6J829WZ6hhEtCmz8CfBBBP69ikMDlYPF2Lumyel6XTI&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=st.ozone.ru&sid=d484643ca8396614#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
+      "source": "https://t.me/filembad"
+    },
+    "cf821ab6b283322e2758d44489cc989182f6f0668d8ccb20cf3196f68f443ec7": {
+      "config": "vless://663836b2-f676-43fb-977f-47c495b1b383@185.207.66.30:443?security=reality&encryption=none&pbk=6J829WZ6hhEtCmz8CfBBBP69ikMDlYPF2Lumyel6XTI&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=st.ozone.ru&sid=d484643ca8396614#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
+      "source": "https://t.me/persianvpnhub"
+    },
+    "c5e02b644f85f2e7cbf0734b22a3b9ac2bbd9da3afa1872bd1377b80c36d1591": {
+      "config": "vless://cf39fab0-bb85-42cb-9945-2ad69d78e575@188.114.97.4:443?encryption=none&security=tls&sni=rubifen.adaspoloandco.com&fp=chrome&insecure=0&allowInsecure=0&type=ws&host=rubifen.adaspoloandco.com&path=%2FGOrbEh%23TELEGRAM-MARAMBASHI_MARAMBASHI_MARAMBASHI_MARAMBASHI_MARAMBASHI%3Fed%3D512#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
+      "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mci/sub_1.txt"
+    },
+    "59044eadff87a54b7b52e9e70deed2eb5f50addf04eae57fdd6d94ef0c440dfa": {
+      "config": "vless://f82332b2-dc8c-eac4-ac12-f276e37e278a@s1.test.anti-zapret.com:8443?security=reality&encryption=none&pbk=0AVsyS7udTbxKRdSyQ2rtFC63icDQOVWq8FvAhhU-WY&headerType=none&type=tcp&sni=s1.test.anti-zapret.com&sid=58fbcddfaae3ade9#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
+      "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "8b5f0f10143d8f1735678709e2d55620e6bd1c5cb1d83b78a28b27473471124e": {
+      "config": "vmess://eyJ2IjoiMiIsImFkZCI6IjE2NS4xNDAuMjE2LjE0MiIsInBvcnQiOiI0NDMiLCJpZCI6ImI2NWEyZDY5LTU2MzQtNDJhMi1lNGJlLTU0ZThhNjE3NjkwMCIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0IjoidGNwIiwidHlwZSI6IiIsInRscyI6IiIsInBzIjoi2Kfar9mHINmF24zYrtmI2KfbjCDZgti32Lkg2YbYtNuMINis2YjbjNmGINi02YggOiBAZmFyc2lwcm94eSIsInNraXAtY2VydC12ZXJpZnkiOnRydWV9#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
+      "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "91a6bce44efeca62fbc85b6bc4720f2a2d7e1ab4e6ab5f286d93174d32c4eeee": {
+      "config": "vmess://eyJhZGQiOiI4Mi4xOTguMjQ2Ljk3IiwiYWlkIjoiMCIsImhvc3QiOiIiLCJpZCI6ImQxM2ZjMmY1LTNlMDUtNDc5NS04MWViLTQ0MTQzYTA5ZTU1MiIsIm5ldCI6InRjcCIsInBhdGgiOiIvIiwicG9ydCI6IjE4MCIsInBzIjoi4pyoIEBOYW1pcmFDb25maWdzIHwg4p2k77iPINmI2LXZhCDYtNiv24wg2KzZiNuM2YYg2LTZiCB8IOKaoSB8IPCfh6nwn4eqIiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ==#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
+      "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "a1273efa867015497de9545010cdfcfeefe496f07c782472074f9e7f4bd67f05": {
+      "config": "vmess://eyJ2IjogIjIiLCAicHMiOiAiQEhvcGVfTmV0LWpvaW4tdXMtb24tVGVsZWdyYW0iLCAiYWRkIjogIjgyLjE5OC4yNDYuMjUwIiwgInBvcnQiOiAiMTgwIiwgInR5cGUiOiAibm9uZSIsICJpZCI6ICJkMTNmYzJmNS0zZTA1LTQ3OTUtODFlYi00NDE0M2EwOWU1NTIiLCAiYWlkIjogIjAiLCAibmV0IjogInRjcCIsICJwYXRoIjogIi8iLCAiaG9zdCI6ICJhZHMueDUucnUiLCAidGxzIjogIiJ9#Telegram%20%40iR_RUSE",
+      "created_at": 1787458745,
       "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
     }
   }
