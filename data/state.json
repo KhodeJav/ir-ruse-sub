@@ -1,11 +1,11 @@
 {
   "telegram": {
-    "2025442005": 166444,
+    "2025442005": 166453,
     "4388653422": 2,
     "2211787746": 33406,
-    "3744627358": 54759,
+    "3744627358": 54770,
     "1836809801": 9308,
-    "1694914385": 20541,
+    "1694914385": 20548,
     "1512034774": 432426
   },
   "configs": {
@@ -438,6 +438,31 @@
       "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTplRGZON1NPRFFjZUlPbUlBYnRKSnRL@198.98.53.130:443#Telegram%20%40iR_Xray",
       "created_at": 1787518561,
       "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "2bf0dd2cfa620b052afe37bfd8d27c338f21ccebdf497a3229351f552d450f34": {
+      "config": "vless://a6cf4b28-ba72-4e8c-90f8-6a884107ab3c@plot.whit3.net:8443?mode=gun&security=reality&encryption=none&authority=&pbk=Hcg9T_s9LuWkVQW14TzIPuyZio32WbA6irp782TUXnM&fp=firefox&type=grpc&serviceName=plot_grpc&sni=plot.whit3.net&sid=0138875bd7d8725a#Telegram%20%40iR_Xray",
+      "created_at": 1787520687,
+      "source": "https://t.me/filembad"
+    },
+    "5512ce34625ce17cc604f78deaf5ee72f42515fd58d0ab61170ece14f4f95f02": {
+      "config": "vless://423b1d79-08c4-403f-9d5e-c541f791b55f@150.241.102.202:443?security=reality&encryption=none&pbk=v1hVg2Uc7Wsc_bhlLfKkML_HUGogQA9O9n9uZFwzQSM&headerType=none&type=tcp&flow=xtls-rprx-vision&sni=america.cendora.ru&sid=065cf4f1c7d83e79#Telegram%20%40iR_Xray",
+      "created_at": 1787520687,
+      "source": "https://t.me/filembad"
+    },
+    "a19542c33d3184af4b867372751453e4890ace59f4e2c1e9ae2a80a4b548581e": {
+      "config": "vless://a6cf4b28-ba72-4e8c-90f8-6a884107ab3c@177.3.212.189:443?security=reality&encryption=none&pbk=I81tkGsfVOK0JNnjsHRluXcXI-DyV_4mLQ4e8QJuSxU&headerType=none&fp=firefox&type=tcp&flow=xtls-rprx-vision&sni=gd-0z.whit3.net&sid=d7d38e70e3362842#Telegram%20%40iR_Xray",
+      "created_at": 1787520687,
+      "source": "https://t.me/filembad"
+    },
+    "0eff0f675ddd235dd6b5d13d55100a06aa18f78da426ed915c0dab057778f415": {
+      "config": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M%3D@173.244.56.6:443#Telegram%20%40iR_Xray",
+      "created_at": 1787520687,
+      "source": "https://t.me/persianvpnhub"
+    },
+    "683e614ed0c9a23c14729c81ef45caa278391fac3fb62270970056556622fa0c": {
+      "config": "ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@173.244.56.6:443#Telegram%20%40iR_Xray",
+      "created_at": 1787520687,
+      "source": "https://t.me/persianvpnhub"
     }
   }
 }
