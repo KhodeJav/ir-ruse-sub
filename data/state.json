@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "2025442005": 166658,
+    "2025442005": 166663,
     "4388653422": 2,
     "2211787746": 33427,
-    "3744627358": 55557,
+    "3744627358": 55580,
     "1836809801": 9335,
     "1694914385": 20582,
     "1512034774": 432464
@@ -433,6 +433,41 @@
       "config": "vmess://eyJ2IjogIjIiLCAicHMiOiAiQEhvcGVfTmV0LWpvaW4tdXMtb24tVGVsZWdyYW0iLCAiYWRkIjogIjgyLjE5OC4yNDYuMjUwIiwgInBvcnQiOiAiMTgwIiwgInR5cGUiOiAibm9uZSIsICJpZCI6ICJkMTNmYzJmNS0zZTA1LTQ3OTUtODFlYi00NDE0M2EwOWU1NTIiLCAiYWlkIjogIjAiLCAibmV0IjogInRjcCIsICJwYXRoIjogIi8iLCAiaG9zdCI6ICJhZHMueDUucnUiLCAidGxzIjogIiJ9#Telegram%20%40iR_Xray",
       "created_at": 1787676631,
       "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "8304dfa611dcc754bcee7be7c94bef6495ddd6bd2ef2e4c2324c63b39427ec4f": {
+      "config": "vless://50414e45-4c5f-5a45-5553-52108a2d5224@104.27.88.172:80?path=/api/ws&security=none&encryption=none&insecure=0&host=web-app-nr6wpa.app-tp57xz.workers.dev&fp=ios&type=ws&allowInsecure=0&sni=web-app-nr6wpa.app-tp57xz.workers.dev&fragment=tlshello,5,94,1,0&fragment2=1-1,109,1,1,355#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/filembad"
+    },
+    "3995d1d60af6e70df4f0052735916df4aa7975c33cbc365973065c33a98b1b90": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.181.91.194:22222?Telegram=VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone-----VaslZone&encryption=none&security=none&type=tcp#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/filembad"
+    },
+    "deceb4efcfd96ef19550e93f3d7825d4d9649168510fcc8f65f8fab1f2115f9a": {
+      "config": "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@63.181.91.194:22222?Telegram=Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server-----Cfox_Server&encryption=none&type=tcp#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/filembad"
+    },
+    "70676120086416518ab2cbafa040c121ea71ec47941d48e421999c019b5feb50": {
+      "config": "vmess://eyJhZGQiOiIyMTMuMTU2LjE1Mi42MyIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJkOTY4MTkxNi01YTg1LTQ0YzgtODZhMi05ZmNhZTg3Y2Y4NTAiLCJpbnNlY3VyZSI6IjAiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiIiwicGNzIjoiIiwicG9ydCI6IjgwODAiLCJwcyI6IkBmaWxlbWJhZCIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoibm9uZSIsInYiOiIyIiwidmNuIjoiIn0=#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/filembad"
+    },
+    "85ceb3482d8ea41a76fe6a644781e04a48c83c724b1fdad515d59a9f97698e7f": {
+      "config": "vless://8b7e1a51-0577-44f3-8d3f-0adefae7f82f@91.99.81.222:8443?security=reality&encryption=none&pbk=dYsy51W78tzZf26ql7Fh0Db65VlRSjGp6EH9nsAIRgo&headerType=none&fp=chrome&spx=/Spz0tOd0EkkLZLX&type=tcp&flow=xtls-rprx-vision&sni=amp-api-edge.apps.apple.com&sid=4716935a30eac6#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/filembad"
+    },
+    "fc6ef169480291470e511344ac45a041c6b94fc8db7ae2b628fc3bb86316ce1f": {
+      "config": "vless://d8b42cd5-b149-4356-9e61-222222222222@45.140.36.118:1054?security=none&encryption=none&headerType=none&type=tcp#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/filembad"
+    },
+    "4cebbacc710042fddf78d79099f3f2cc854be022564a88b1770ec2daa2491de5": {
+      "config": "vless://8ff82100-8aad-4281-bf41-f318519d7182@bridge.sfproxy.fuck-rkn.dev:443?security=reality&encryption=none&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=de.jobinvest.ru#Telegram%20%40iR_Xray",
+      "created_at": 1787679621,
+      "source": "https://t.me/persianvpnhub"
     }
   }
 }
