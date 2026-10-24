@@ -1,11 +1,11 @@
 {
   "telegram": {
-    "2025442005": 173966,
+    "2025442005": 173972,
     "4388653422": 2,
     "2211787746": 34096,
-    "3744627358": 66705,
+    "3744627358": 66754,
     "1836809801": 10276,
-    "1694914385": 21701,
+    "1694914385": 21705,
     "1512034774": 434910
   },
   "configs": {
@@ -138,6 +138,11 @@
       "config": "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpvWklvQTY5UTh5aGNRVjhrYTNQYTNB@193.29.139.225:8080?#Telegram%20%40iR_Xray",
       "created_at": 1792877562,
       "source": "https://raw.githubusercontent.com/mahsanet/MahsaFreeConfig/refs/heads/main/mtn/sub_1.txt"
+    },
+    "bd8e7cd96a51c7ff38e85a287361b7c4f4ed45d188fd06d2875a0c6ddb17fd52": {
+      "config": "vless://26ee2529-e446-41c2-81e3-cbbce04b8347@looabturkeyeoijji.global.ssl.fastly.net:443?encryption=none&security=tls&sni=looabturkeyeoijji.global.ssl.fastly.net&type=ws&host=looabturkeyeoijji.global.ssl.fastly.net.&path=/#Telegram%20%40iR_Xray",
+      "created_at": 1792885180,
+      "source": "https://t.me/persianvpnhub"
     }
   }
 }
